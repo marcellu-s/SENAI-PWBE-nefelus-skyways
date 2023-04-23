@@ -9,7 +9,7 @@
 
 header {
     height: 720px;
-    background-image: url("../img/banner/pexels-pixabay-358319.jpg");
+    background-image: url("../../img/banner/pexels-pixabay-358319.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -283,7 +283,7 @@ header a:hover {
 
 .know-more-area {
     width: 100%;
-    background-image: url("../img/banner/pexels-riccardo-789382.jpg");
+    background-image: url("../../img/banner/pexels-riccardo-789382.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
