@@ -1,0 +1,76 @@
+/* FOOTER */
+
+#footer-fluid {
+background-color: #333;
+}
+
+.footer-content {
+color: #fff;
+padding: 3rem 2rem;
+display: flex;
+flex-direction: column;
+}
+
+.footer-content .about-parking {
+margin-bottom: 3rem;
+}
+
+.about-parking .footer-title {
+font-size: 1.2rem;
+font-weight: 600;
+margin-bottom: 1.5rem;
+}
+
+.footer-content .content-details {
+display: flex;
+flex-direction: column;
+margin-bottom: 3rem;
+}
+
+.content-details .footer-title {
+font-size: 1.2rem;
+font-weight: 600;
+margin-bottom: 1.5rem;
+}
+
+.list-content {
+margin-bottom: 2.5rem;
+}
+
+.list-content .list-item {
+font-size: 1rem;
+font-weight: 400;
+}
+
+.list-content .list-item::before{
+content: '>\00A0';
+}
+
+.footer-content .line-separator {
+width: 100%;
+height: 1px;
+background-color: #aaa;
+margin-bottom: 2rem;
+}
+
+.footer-content .copyright {
+align-self: center;
+text-align: center;
+}
+
+.footer-content .list-item a:hover {
+    color: #190b71;
+}
+
+@media screen and (min-width: 992px) {
+	.footer-content .content-details {
+		flex-direction: row;
+		margin: 0 auto;
+		gap: 64px;
+	}
+
+	.footer-content .contact-info {
+		display: flex;
+		flex-direction: column;
+	}
+}
