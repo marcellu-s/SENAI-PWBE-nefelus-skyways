@@ -1,0 +1,30 @@
+.input-travel-from, .input-going-to {
+    position: relative;
+}
+
+.input-control .input-search-area {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #a5a5a5;
+    overflow: scroll;
+    overflow-x: hidden;
+    z-index: 2;
+
+    display: none;
+}
+
+.input-control .input-search-area.searching {
+    display: block;
+}
+
+.input-control .input-search-area span {
+    display: block;
+    padding-bottom: 0.25rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #c5c5c5;
+    cursor: pointer;
+    text-transform: capitalize;
+}
