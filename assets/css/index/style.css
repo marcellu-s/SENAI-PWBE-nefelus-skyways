@@ -20,7 +20,12 @@ header {
 }
 
 header a:hover {
-    color: #666;
+    color: #999;
+}
+
+header a.in-page {
+    color: #999;
+    pointer-events: none;
 }
 
 #navbar {

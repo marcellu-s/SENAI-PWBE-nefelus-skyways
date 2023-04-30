@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+header {
+    background-color: #333;
+}
+
+header a:hover {
+    color: #999;
+}
+
+header a.in-page {
+    color: #999;
+    pointer-events: none;
+}
+
+.bg-mobile-menu {
+    background-color: #333;
+}
+
+.booking-area {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 3rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.booking-area .input-control label {
+    font-weight: 600;
+    color: #555;
+}
+
+.booking-area .input-control input {
+    display: block;
+    outline: none;
+    width: 100%;
+    border: none;
+    margin-top: 0.7rem;
+    color: #333;
+}
+
+.booking-area .mobile-hide {
+    display: none;
+}
+
+.booking-area form {
+    display: flex;
+    flex-flow: column;
+    gap: 2rem;
+}
+
+.booking-area #segment {
+    display: block;
+    margin-top: 1rem;
+}
+
+.booking-area .search-btn {
+    outline: none;
+    border: 1px solid #333;
+    padding: 0.7rem 1.2rem;
+    background-color: #333;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 16px;
+
+    transition: background-color 0.3s;
+}
+
+.dropdown {
+    display: flex;
+    flex-flow: column nowrap;   
+
+    transition: 0.3s;
+}
+
+.dropdown .trigger-button {
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    color: #555;
+    font-weight: 600;
+    background-color: transparent;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.trigger-button img {
+    width: 16px;
+    transform: rotate(180deg);
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+/* .dropdown.open {
+    background-color: #999;
+    color: #fff;
+} */
+
+.dropdown.open .trigger-button img {
+    transform: rotate(0deg);
+}
+
+.dropdown-content {
+    display: none;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+#trecho {
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+
+    padding: 1rem 2rem;
+}
+
+#cliente {
+    list-style-type: none;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+
+    padding: 1rem 2rem;
+}
+
+#cliente i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#cliente li, #trecho label {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #190b71;
+}
+
+.input-control.occult {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.search-btn:hover {
+    background-color: #fff;
+    color: #333;
+}

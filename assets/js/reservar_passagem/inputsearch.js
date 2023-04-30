@@ -73,15 +73,17 @@ function ajaxSearch(search, inputRefence) {
         });
     }
 
+
+
     $.ajax({
         method: "POST",
-        url: "./assets/php/showairports.php",
+        url: "../../assets/php/showairports.php",
         data: {
             q: search
         },
         async: false,
         success: function( response ) {
-
+            
             if (!search && !inputRefence) {
                 bothInputSearchArea(response);
             } else if (inputRefence == 'inputGoingTo') {

@@ -1,0 +1,89 @@
+#fade, #modal {
+    transition: 0.5s;
+    opacity: 1;
+    pointer-events: all;
+}
+
+#fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+#modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 500px;
+    max-width: 90%;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.modal-body .duration {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.modal-body .flight-id span {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.modal-body .flight-id {
+    margin: 1rem 0;
+}
+
+.modal-body .travel-from-title, .modal-body .going-to-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+.modal-body .travel-from-content, .modal-body .going-to-content {
+    margin-bottom: 1.5rem;
+}
+
+.modal-body .travel-from-info, .modal-body .going-to-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 300;
+}
+
+#close-modal {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#fade.hide, #modal.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#modal.hide {
+    top: 0;
+}

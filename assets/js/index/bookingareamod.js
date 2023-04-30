@@ -1,7 +1,7 @@
 const formBookingArea = document.querySelector('.booking-area form');
 
 function clickFunction() {
-    window.location.href = 'https://www.google.com';
+    window.location.href = '';
 }
 
 
