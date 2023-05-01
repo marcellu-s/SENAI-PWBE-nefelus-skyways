@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+header {
+    background-color: #333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header a:hover {
+    color: #999;
+}
+
+header a.in-page {
+    color: #999;
+    pointer-events: none;
+}
+
+.bg-mobile-menu {
+    background-color: #333;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* COLOR INFORMATION AREA */
+
+/* .color-information-area {
+    
+} */
+
+.color-information-area {
+    margin: 6rem 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.color-information-area div {
+    padding: 2rem;
+}
+
+.color-information-area .color-legend {
+    list-style-type: none;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.color-information-area .occupant-info {
+    padding: 0;
+    text-align: center;
+}
+
+.color-information-area .occupant-info span {
+    font-size: 1.2rem;
+}
+
+.color-legend li {
+    padding: 0.7rem;
+    border-radius: 16px;
+}
+
+.unavailable {
+    background-color: #ff0000 !important;
+}
+
+.available {
+    background-color: #333 !important;
+}
+
+.selected {
+    background-color: #005eff !important;
+}
+
+.premium {
+    background-color: goldenrod !important;
+}
+
+/* FIM  */
+
+/* CONFIRM SEAT AREA */
+
+.seats-area {
+    font-family: 'Roboto Mono', monospace;
+    margin-bottom: 6rem;
+}
+
+.seat {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    cursor: pointer;
+
+    transition: transform 0.3s;
+}
+
+.seat:hover {
+    transform: scale(1.1);
+}
+
+.seats-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+
+.seats-left, .seats-mid, .seats-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.seats-row {
+    display: flex;
+    gap: 1rem;
+}
+
+/* FIM */
+
+/* NEXT STEP BUTTON */
+
+.next-step {
+    position: fixed;
+
+    bottom: 16px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    justify-content: center;
+}
+
+.btn-next-step {
+    padding: 0.7rem 1.2rem;
+    background-color: #333;
+    color: #fff;
+    font-weight: 500;
+    outline: none;
+    border: 1px solid #333;
+    cursor: pointer;
+    border-radius: 16px;
+
+    transition: background-color 0.3s;
+}
+
+.btn-next-step:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* FIM */
+
+/* MODAL INFO SEAT */
+
+.info-seat {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-seat span {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.info-seat span span {
+    font-weight: 400;
+}
+
+.btn-confirm {
+    margin-top: 2rem;
+}
+
+.btn-confirm button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    outline: none;
+    border: 1px solid #333;
+    background-color: #333;
+    color: #fff;
+    border-radius: 16px;
+    cursor: pointer;
+
+    transition: background-color 0.3s;
+}
+
+.btn-confirm button:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+#fade, #modal {
+    transition: 0.5s;
+    opacity: 1;
+    pointer-events: all;
+}
+
+#fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+#modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    width: 500px;
+    max-width: 90%;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+}
+
+.modal-body p {
+    margin-bottom: 1rem;
+}
+
+#close-modal {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#fade.hide, #modal.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#modal.hide {
+    top: 0;
+}
