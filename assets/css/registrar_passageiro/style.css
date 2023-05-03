@@ -93,6 +93,20 @@ header a.in-page {
     transform: rotateX(180deg);
 }
 
+
+.input-control .no-cpf {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.input-control .no-cpf input {
+    width: 15px;
+}
+
+
 .dropdown {
     position: relative;
 
@@ -139,4 +153,24 @@ header a.in-page {
 
 .dropdown-hide .dropdown-menu {
     display: none;
+}
+
+.input-btn button {
+    border-radius: 16px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: #fff;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+
+    transition: background-color 0.3s;
+
+    display: block;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+
+.input-btn button:hover {
+    background-color: #fff;
+    color: #333;
 }
