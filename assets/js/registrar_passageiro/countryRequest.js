@@ -1,6 +1,7 @@
 const dropdownNationality = document.querySelector('.input-control .dropdown-nationality .dropdown-menu');
+const dropdownDDI = document.querySelector('.input-control .dropdown-ddi .dropdown-menu');
 
-const url = 'https://servicodados.ibge.gov.br/api/v1/paises/{paises}';
+const url = "https://api-paises.pages.dev/paises.json";
 
 function selectDropdownItem() {
 
@@ -25,47 +26,44 @@ function selectDropdownItem() {
     })
 }
 
-function addItem(item) {
+function addItem(itemDDI, itemNationality) {
 
-    dropdownNationality.appendChild(item);
+    dropdownNationality.appendChild(itemNationality);
+    dropdownDDI.appendChild(itemDDI);
 }
 
-function createElement(data) {
+function createElement(dataDDI, dataNationality) {
 
-    let li = document.createElement('li');
-    li.classList.add('dropdown-item');
-    li.textContent = data;
+    let liDDI = document.createElement('li');
+    liDDI.classList.add('dropdown-item');
+    liDDI.textContent = dataDDI;
 
-    addItem(li);
+    let liNationality = document.createElement('li');
+    liNationality.classList.add('dropdown-item');
+    liNationality.textContent = dataNationality;
+
+    addItem(liDDI, liNationality);
 }
 
 async function countryRequest() {
 
     await fetch(url)
-            .then((response) => response.json())
-            .then((json) => {
+        .then((response) => response.json())
+        .then((json) => {
 
-                    let prev = '';
+            for (let i = 0; i < 236; i++) {
 
-                    [...json].forEach(element => {
+                let name = json[i].pais;
 
-                    let nome = element.nome.abreviado;
+                let ddi = json[i].ddi;
 
-                    if (nome != prev) {
+                createElement(`${name} +${ddi}`, name);
+            }
+        })
+        .catch((error) => console.log(error));
 
-                        prev = nome;
-                        createElement(nome);
-                    }
-
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-    console.log('teste');
-    
+    // Essa função apenas executará, quando o código acima ser finalizado; 
     selectDropdownItem();
 }
 
-countryRequest();
+document.onload = countryRequest();
