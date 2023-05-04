@@ -24,6 +24,7 @@
         color: #fff;
         font-weight: 500;
         border-radius: 16px;
+        border: 1px solid #333;
     }
 
     .dropdown {
@@ -117,6 +118,7 @@
     }
 
     .search-btn:hover {
-        background-color: #666;
+        background-color: #fff;
+        color: #333;
     }
 }

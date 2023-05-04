@@ -24,9 +24,9 @@ function updateModalTriggerElements() {
             let wrapperFlightElement = triggerParentElement.parentElement;
 
             // Input[type="hidden"] - Contendo o ID do voo
-            let inputIdFlight = wrapperFlightElement.querySelector('.input-flight"').value; 
+            let inputIdFlight = wrapperFlightElement.querySelector('.input-flight').value; 
     
-            ajaxRequestForModalDetails(inputIdFlight);
+            // ajaxRequestForModalDetails(inputIdFlight);
             
             toggleModal();
         });
