@@ -237,13 +237,11 @@ header a.in-page {
     align-items: center;
     gap: 1rem;
     visibility: hidden;
-
-    transition: background-color 0.3s;
 }
 
 .offers-main-content:hover .layer-on-hover {
     visibility: visible;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #fff;
 }
 
 .layer-content {
@@ -272,14 +270,22 @@ header a.in-page {
 }
 
 .layer-content .btn {
-    border: none;
+    border: 1px solid #333;
     outline: none;
     background-color: #333;
     color: #fff;
     font-weight: 500;
     border-radius: 16px;
-    padding: 0.7rem 1.2rem;
+    padding: 0.5rem 1rem;
     margin-top: 1rem;
+
+    transition: background-color 0.3s;
+}
+
+.layer-content .btn:hover {
+    background-color: #fff;
+    color: #333;
+
 }
 
 /* END SECTION - OFFERS-AREA */
