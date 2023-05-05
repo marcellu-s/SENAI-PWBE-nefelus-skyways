@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+header {
+    background-color: #333;
+}
+
+header a:hover {
+    color: #999;
+}
+
+header a.in-page {
+    color: #999;
+    pointer-events: none;
+}
+
+.bg-mobile-menu {
+    background-color: #333;
+}
+
+main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.actual-account-login {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #d2d2d2;
+}
+
+.dashboard {
+    margin-top: 3rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.dashboard-display {
+    padding: 2rem;
+    border: 1px solid #333;
+    border-radius: 16px;
+    height: 130px;
+}
+
+.dashboard-display i {
+    font-size: 1.5rem;
+    padding: 0.25rem 0.40rem;
+    border-radius: 50%;
+    cursor: pointer;
+
+    transition: background-color 0.3s;
+}
+
+.dashboard-display i:hover {
+    background-color: #d2d2d2;
+}
+
+.dashboard-display span:first-child {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.dashboard-display span{
+    display: block;
+}
+
+.dashboard-display select {
+    width: 100%;
+}
+
+.response-query-selection {
+    margin-top: 3rem;
+    border: 1px solid #d2d2d2;
+    padding: 3rem;
+}
+
+.response-query-selection table {
+    width: 100%;
+}
+
+.response-query-selection caption {
+    margin-bottom: 2rem;
+}
+
+.response-query-selection .input-filter {
+    border: 1px solid #333;
+    outline: none;
+    padding: 0.25rem 1rem;
+}
+
+tr {
+    text-align: center;
+}
+
+tr td {
+    padding: 1.5rem 1rem;
+}
+
+@media screen and (max-width: 668px) {
+    .response-query-selection {
+        overflow-x: scroll;
+    }
+}

@@ -1,0 +1,168 @@
+ <!DOCTYPE html>
+ <html lang="pt-BR">
+ <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/icons/favicon.ico" type="image/x-icon">
+    <title>Área de trabalho - Nefelus SkyWays</title>
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- BOOTSTRAP ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../admin/assets/css/main/style.css">
+</head>
+<body>
+    <header>
+        <div id="navbar">
+            <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <a href="../../index.html" class="-m-1.5 p-1.5">
+                        <span class="sr-only">Your Company</span>
+                        <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
+                    </a>
+                </div>
+                <div class="flex lg:hidden">
+                    <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
+                        id="open-menu">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="../../index.html" class="text-sm font-semibold leading-6 text-white in-page">Início</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-white">Gerenciar voos</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-white">Tela admin</a>
+                    <a href="#" class="text-sm font-semibold leading-6 text-white">Tela admin</a>
+                </div>
+                <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <a href="../../pages/login.html" class="text-sm font-semibold leading-6 text-white mr-8">Deslogar</a>
+                </div>
+            </nav>
+            <!-- Mobile menu, show/hide based on menu open state. -->
+            <div class="lg:hidden hidden" role="dialog" aria-modal="true" id="mobile-menu">
+                <!-- Background backdrop, show/hide based on slide-over state. -->
+                <div class="fixed inset-0 z-10"></div>
+                <div
+                    class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-mobile-menu px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                    <div class="flex items-center justify-between">
+                        <a href="../../index.html" class="-m-1.5 p-1.5">
+                            <span class="sr-only">Your Company</span>
+                            <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
+                        </a>
+                        <button type="button" class="-m-2.5 rounded-md p-2.5 text-white" id="close-menu">
+                            <span class="sr-only">Close menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-6 flow-root">
+                        <div class="-my-6 divide-y divide-white">
+                            <div class="space-y-2 py-6">
+                                <a href="../../index.html"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Início</a>
+                                <a href="../../pages/reservar_passagem/reservar_passagem.html"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Gerenciar voos</a>
+                                <a href="#"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Tela admin</a>
+                                <a href="#"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Tela admin</a>
+                            </div>
+                            <div class="py-6">
+                                <a href="../../pages/login.html" class="text-sm font-semibold leading-6 text-white mr-8">Deslogar<span aria-hidden="true">&rarr;</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="actual-account-login">
+            <p>Bem vindo, <span>Admin name</span></p>
+        </div>
+
+        <div class="dashboard">
+            <div class="dashboard-display total-flights">
+                <span>----</span>
+                <select name="query1" id="query1">
+                    <option value="" selected disabled>Visualizar</option>
+                    <option value="">Voos realizados</option>
+                    <option value="">Passageiros atendidos</option>
+                    <option value="">Aeroportos em operação</option>
+                    <option value="">Aeronaves em operação</option>
+                </select>
+            </div>
+            <div class="dashboard-display">
+                <span>Adicionar</span>
+                <select name="query1" id="query1">
+                    <option value="" selected disabled>---</option>
+                    <option value="">Voo</option>
+                    <option value="">Avião</option>
+                    <option value="">Aeroporto</option>
+                    <option value="">Cidade</option>
+                </select>
+            </div>
+            <div class="dashboard-display">
+                <span>Ir para relatório</span>
+                <i class="bi bi-link"></i>
+            </div>
+        </div>
+        
+        <div class="response-query-selection">
+            <table>
+                <thead>
+                    <tr>
+                        <caption><input type="text" placeholder="Buscar" class="input-filter"></caption>
+                        <th>IATA</th>
+                        <th>Aeroporto</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Editar</th>
+                        <th>Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CGH</td>
+                        <td>Aeroporto Internacional de Congonhas</td>
+                        <td>Congonhas</td>
+                        <td>São Paulo</td>
+                        <td><a href="#"><i class="bi bi-pen"></i></a></td>
+                        <td><a href="#"><i class="bi bi-x-lg"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>CGH</td>
+                        <td>Aeroporto Internacional de Congonhas</td>
+                        <td>Congonhas</td>
+                        <td>São Paulo</td>
+                        <td><a href="#"><i class="bi bi-pen"></i></a></td>
+                        <td><a href="#"><i class="bi bi-x-lg"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>CGH</td>
+                        <td>Aeroporto Internacional de Congonhas</td>
+                        <td>Congonhas</td>
+                        <td>São Paulo</td>
+                        <td><a href="#"><i class="bi bi-pen"></i></a></td>
+                        <td><a href="#"><i class="bi bi-x-lg"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <!-- JavaScript -->
+    <script src="../../assets/js/mobileMenu.js"></script>
+</body>
+</html>
