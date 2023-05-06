@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+header {
+    background-color: #333;
+    margin-bottom: 6rem;
+}
+
+header a:hover {
+    color: #999;
+}
+
+header a.in-page {
+    color: #999;
+    pointer-events: none;
+}
+
+.bg-mobile-menu {
+    background-color: #333;
+}
+
+  /* FORMULARIO */
+  
+  .contact-form {
+      padding: 0 2rem;
+      margin-bottom: 3rem;
+  }
+  
+  .contact-form .input-control {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+  
+      margin-bottom: 2rem;
+  }
+  
+  .input-control label {
+      font-size: 1rem;
+      font-weight: 400;
+  }
+  
+  .input-control input {
+      border: 1px solid #333;
+      outline: none;
+      padding: 0.5rem 1rem;
+  }
+  
+  .input-control textarea {
+      outline: none;
+      border: 1px solid #333;
+  
+      padding: 1rem;
+  }
+  
+  .contact-form button[type=submit] {
+      display: block;
+      margin: 0 auto;
+      padding: 0.5rem 0;
+      text-align: center;
+      width: 150px;
+      background-color: #333;
+      border: 1px solid #333;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 16px;
+  
+      transition: background-color 0.3s;
+  }
+  
+  .contact-form button[type=submit]:hover {
+      background-color: #fff;
+      color: #333;
+  }
+  
+  /* INFORMAÇÕES DE CONTATO */
+  
+  .contact-information {
+      padding: 0 2rem;
+      margin-bottom: 3rem;
+  }
+  
+  .contact-information h2 {
+      text-align: center;
+      font-size: 1.25rem;
+      color: #333;
+      font-weight: 500;
+  }
+  
+  .contact-information .information {
+      margin: 2rem 0;
+  }
+  
+  .contact-information .information-title {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+  }
+  
+  .contact-information .information-content {
+      font-weight: 300;
+  }
+  
+  .information-content a:hover {
+      text-decoration: underline;
+  }
+  
+  /* FOOTER */
+  
+  #footer-fluid {
+    background-color: #333;
+  }
+  
+  .footer-content {
+    color: #fff;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-content .about-parking {
+    margin-bottom: 3rem;
+  }
+  
+  .about-parking .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  
+  .footer-content .content-details {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+  }
+  
+  .content-details .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+  
+  .list-content {
+    margin-bottom: 2.5rem;
+  }
+  
+  .list-content .list-item {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  
+  .list-content .list-item::before{
+    content: '>\00A0';
+  }
+  
+  .footer-content .line-separator {
+    width: 100%;
+    height: 1px;
+    background-color: #aaa;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-content .copyright {
+    align-self: center;
+    text-align: center;
+  }

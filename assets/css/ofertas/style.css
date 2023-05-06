@@ -1,0 +1,457 @@
+*{
+    font-family: 'Montserrat', system-ui, sans-serif;
+}
+main div{
+    display: flex;
+    justify-content: center;
+  
+}
+/* HEADER */
+
+header {
+    height: 720px;
+    background-image: url("../../img/banner/ramon-kagie-hYwulGJHiVM-unsplash.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+header a:hover {
+    color: #999;
+}
+
+header a.in-page {
+    color: #999;
+    pointer-events: none;
+}
+
+#navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+    transition: background-color 0.7s ease;
+}
+
+.gloom {
+    background-color: #333;
+}
+
+/* 
+#190b71
+#003580
+#31B5EB 
+*/
+
+#banner-layer {
+    height: 100%;
+
+    position: relative;
+}
+
+.bg-mobile-menu {
+    background-color: #333;
+}
+
+.headline-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 0 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.headline-area h1 {
+   
+    width: 1000;
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    color: aliceblue;
+    background-color: #333;
+    padding: 5px;
+
+}
+
+/* EBD HEADER */
+
+
+#travel{
+    margin-top: 3rem;
+    display: flex;
+    background-color: gainsboro;
+    font-size: 20px;
+    height: 200px;
+    width: 75%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    }
+#travel h3{
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    padding-bottom: 4rem;
+}
+
+#travel button[type="submit"] {
+    display: flex;
+    width: 25%;
+    height: 25%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #333;
+    border: 1px solid #333;
+    border-radius: 16px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 0.3s;
+  }
+  
+#travel button[type="submit"]:hover {
+    color: #333;
+    background-color: #fff;
+}
+
+
+
+#parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-main{
+  justify-content: center;
+  align-items: center;  
+}
+.content-main h1{
+    display: flex;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Montserrat';
+    color: #428AFF;
+}
+.content-title{
+    margin-top: 1rem;
+    display: flex;
+    background-color: #fff;
+    font-size: 20px;
+    height: 200px;
+    width: 75%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* SECTION - BOOKING AREA */
+
+.booking-area {
+    max-width: 80%;
+    margin: 0 auto;
+    position: relative;
+    top: -50px;
+
+    margin: 0 auto;
+
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.booking-area .input-control label {
+    font-weight: 600;
+    color: #555;
+}
+
+.booking-area .input-control input {
+    display: block;
+    outline: none;
+    width: 100%;
+    border: none;
+    margin-top: 0.7rem;
+    color: #333;
+}
+
+.booking-area .mobile-hide {
+    display: none;
+}
+
+/* END SECTION - BOOKING AREA */
+
+/* SECTION - FEATURES-AREA */
+
+.features-area {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: #190b71;
+}
+
+.description {
+    max-width: 500px;
+    text-align: center;
+    font-weight: 300;
+    margin: 2rem auto;
+    font-size: 1rem;
+}
+
+.features {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.feature-item {
+    height: 100%;
+    max-width: 260px;
+}
+
+.feature-item img {
+    width: 250px;
+    height: 200px;
+}
+
+.feature-item .img-title {
+    display: block;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #190b71;
+}
+
+.feature-item .feature-description {
+    display: block;
+    max-width: 250px;
+    text-align: center;
+    font-weight: 300;
+}
+
+/* END SECTION - FEATURES-AREA */
+
+/* SECTION - OFFERS-AREA */
+
+.offers-area {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.offers {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.offers-item {
+    position: relative;
+    border-radius: 16px;
+    border: 1px solid #999;
+    max-width: 400px;
+   
+}
+
+.offers-item .offers-img img {
+    height: 200px;
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+}
+
+.offers-item .offers-description {
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.offers-description .destiny {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #190b71;
+    
+}
+
+.offers-description .date {
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.offers-description .price {
+    font-size: 1rem;
+}
+
+.offers-main-content .layer-on-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    visibility: hidden;
+
+    transition: background-color 0.3s;
+}
+
+.offers-main-content:hover .layer-on-hover {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.layer-content {
+    width: 90%;
+    text-align: center;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.layer-content span {
+    display: block;
+}
+
+.layer-content .destiny {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #190b71;
+    font-size: 1.15rem;
+    padding-right: 10px;
+}
+
+.layer-content .date {
+    font-weight: 300;
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+.layer-content .btn {
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 16px;
+    padding: 0.7rem 1.2rem;
+    margin-top: 1rem;
+}
+
+/* END SECTION - OFFERS-AREA */
+
+/* SECTION - know-more-area */
+
+.know-more-area {
+    width: 100%;
+    background-image: url("../../img/banner/pexels-riccardo-789382.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    
+
+    transition: background-image 1s ease-in-out;
+}
+
+.layer-backgroud {
+    background-color: rgba(25, 11, 122, 0.7);
+    height: 100%;
+
+    padding: 3rem 2rem;
+}
+
+.know-more-area .title {
+    color: #fff;
+}
+
+.know-more-area .description {
+    color: #fff;
+}
+
+.know-more-area .description strong {
+    color: #31B5EB;
+    font-weight: 600;
+}
+
+.know-more-area .description a:hover {
+    text-decoration: underline;
+}
+
+.know-more-box {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-radius: 16px;
+    max-width: 350px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.know-more-box .happy-customers-qnta {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.know-more-box .happy-customers-txt {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #190b71;
+}
+
+.know-more-box-right i {
+    color: #190b71;
+    font-size: 2rem;
+}
+
+.know-more-area button {
+    padding: 0.4rem 1rem;
+    background-color: #190b71;
+    color: #fff;
+    border-radius: 16px;
+
+    transition: background-color 0.3s;
+}
+
+.know-more-area button:hover {
+    background-color: #2b1d88;
+}
+
+/* END SECTION - know-more-area */

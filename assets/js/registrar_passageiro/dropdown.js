@@ -1,19 +1,22 @@
-const allDropdowns = document.querySelectorAll('.input-control .dropdown');
+function dropdownToggle(dropdownParam) {
 
-document.addEventListener('mousedown', (event) => {
+    dropdownParam.classList.toggle('show');
+}
 
-    allDropdowns.forEach((dropdown) => {
+const arrayDropdown = document.querySelectorAll('.input-control .dropdown');
 
-        if (dropdown.contains(event.target)) {
+arrayDropdown.forEach((dropdown) => {
 
-            dropdown.classList.remove('dropdown-hide');
-
-            dropdown.querySelector('img').classList.add('img-rotate');
-        } else {
-            
-            dropdown.classList.add('dropdown-hide');
-            
-            dropdown.querySelector('img').classList.remove('img-rotate');
-        }
+    dropdown.addEventListener('click', () => {
+        
+        dropdownToggle(dropdown);
     });
+});
+
+window.addEventListener('click', (event) => {
+
+    if (!event.target.matches('.input-with-icon') && !event.target.matches('.input-icon')) {
+
+        arrayDropdown.forEach((dropdown) => dropdown.classList.remove('show'));
+    }
 });

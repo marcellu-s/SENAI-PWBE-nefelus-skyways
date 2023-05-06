@@ -132,6 +132,8 @@ header a.in-page {
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
+
+    display: none;
 }
 
 .dropdown-menu .dropdown-item {
@@ -149,10 +151,6 @@ header a.in-page {
 .dropdown-menu .dropdown-item:hover {
     background-color: #fff;
     color: #333;
-}
-
-.dropdown-hide .dropdown-menu {
-    display: none;
 }
 
 .input-btn button {
@@ -173,4 +171,8 @@ header a.in-page {
 .input-btn button:hover {
     background-color: #fff;
     color: #333;
+}
+
+.dropdown.show .dropdown-menu{
+    display: block;
 }

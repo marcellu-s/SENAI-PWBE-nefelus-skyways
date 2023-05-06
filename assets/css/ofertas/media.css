@@ -1,0 +1,46 @@
+@media (max-width: 768px) {
+    .headline-area h1 {
+      font-size: 40px;
+    }
+    #travel button[type="submit"] {
+        width: 50%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .headline-area h1 {
+      font-size: 30px;
+    }
+    #travel button[type="submit"] {
+        width: 50%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: white;
+        border: 2px solid black;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+  }
+  /* Centraliza o elemento h2 dentro da seção de ofertas quando a tela tiver largura menor que 400 pixels */
+@media (max-width: 450px) {
+    .content-main{
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .content-text{
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -204,8 +204,6 @@ function isAllDatesValid(dateBirth, passportDateIssue, rgDateIssue) {
     let checkPassportDateIssue = new Date(passportDateIssue);
     let checkRgDateIssue = new Date(rgDateIssue);
 
-    debugger;
-
     if ((checkPassportDateIssue <= checkDateBirth) || (checkRgDateIssue <= checkDateBirth)) {
 
         return false;
@@ -321,5 +319,5 @@ form.addEventListener('submit', (event) => {
     }
 
     // Envia o formulário se tudo estiver válido.
-    // form.submit();
+    form.submit();
 });
