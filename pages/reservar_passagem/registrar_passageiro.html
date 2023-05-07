@@ -97,21 +97,21 @@
             <form action="">
                 <div class="input-control">
                     <label for="first-name">PRIMEIRO NOME</label>
-                    <input type="text" id="first-name" name="first-name" placeholder="Exemplo: João" >
+                    <input type="text" id="first-name" name="first-name" placeholder="Exemplo: João" required>
                 </div>
                 <div class="input-control">
                     <label for="last-name">ÚLTIMO NOME</label>
-                    <input type="text" id="last-name" name="last-name" placeholder="Exemplo: Silva" >
+                    <input type="text" id="last-name" name="last-name" placeholder="Exemplo: Silva" required>
                 </div>
                 <div class="input-control">
                     <label for="date-of-birth">DATA DE NASCIMENTO</label>
-                    <input type="date" id="date-of-birth" name="date-of-birth" >
+                    <input type="date" id="date-of-birth" name="date-of-birth" required>
                 </div>
                 <div class="input-control">
                     <label for="gender">GÊNERO</label>
                     <div class="dropdown dropdown-gender">
                         <div class="input-with-icon">
-                            <input type="text" id="gender" name="gender" placeholder="Escolha uma opção" >
+                            <input type="text" id="gender" name="gender" placeholder="Escolha uma opção" required>
                             <img class="input-icon" src="../../assets/img/icons/down-arrow-backup-2-svgrepo-com.svg" alt="">
                         </div>
                         <ul class="dropdown-menu">
@@ -124,7 +124,7 @@
                     <label for="nationality">NACIONALIDADE</label>
                     <div class="dropdown dropdown-nationality">
                         <div class="input-with-icon">
-                            <input type="text" id="nationality" name="nationality" placeholder="Brasil" >
+                            <input type="text" id="nationality" name="nationality" placeholder="Brasil" required>
                             <img class="input-icon" src="../../assets/img/icons/down-arrow-backup-2-svgrepo-com.svg" alt="">
                         </div>
                         <ul class="dropdown-menu">
@@ -134,19 +134,19 @@
                 </div>
                 <div class="input-control">
                     <label for="passport">PASSAPORTE</label>
-                    <input type="text" id="passport" name="passport" placeholder="Digite os números do documento" >
+                    <input type="text" id="passport" name="passport" placeholder="Digite os números do documento" required>
                     <label for="passport-date-of-issue">DATA DE EMISSÃO</label>
-                    <input type="date" id="passport-date-of-issue" name="passport-date-of-issue" >
+                    <input type="date" id="passport-date-of-issue" name="passport-date-of-issue" required>
                 </div>
                 <div class="input-control">
                     <label for="rg">RG</label>
-                    <input type="text" id="rg" name="rg" placeholder="Digite os números do documento" >
+                    <input type="text" id="rg" name="rg" placeholder="Digite os números do documento" required>
                     <label for="rg-date-of-issue">DATA DE EMISSÃO</label>
-                    <input type="date" id="rg-date-of-issue" name="rg-date-of-issue" >
+                    <input type="date" id="rg-date-of-issue" name="rg-date-of-issue" required>
                 </div>
                 <div class="input-control">
                     <label for="cpf" id="cpf-label">CPF</label>
-                    <input type="text" id="cpf" name="cpf" placeholder="Digite os números do documento" >
+                    <input type="text" id="cpf" name="cpf" placeholder="Digite os números do documento" required>
                     <div class="no-cpf">
                         <input type="checkbox" name="no-cpf" id="no-cpf">
                         <label for="no-cpf">Não sou brasileiro e não tenho CPF</label>
@@ -154,13 +154,13 @@
                 </div>
                 <div class="input-control">
                     <label for="email">E-MAIL</label>
-                    <input type="email" id="email" name="email" placeholder="Digite um e-mail válido" >
+                    <input type="email" id="email" name="email" placeholder="Digite um e-mail válido" required>
                 </div>
                 <div class="input-control">
                     <label for="ddi">DDI</label>
                     <div class="dropdown dropdown-ddi">
                         <div class="input-with-icon">
-                            <input type="text" id="ddi" name="ddi" placeholder="Brasil +55" >
+                            <input type="text" id="ddi" name="ddi" placeholder="Brasil +55" required>
                             <img class="input-icon" src="../../assets/img/icons/down-arrow-backup-2-svgrepo-com.svg" alt="">
                         </div>
                         <ul class="dropdown-menu">
@@ -169,7 +169,7 @@
                 </div>
                 <div class="input-control">
                     <label for="telephone">TELEFONE CELULAR</label>
-                    <input type="tel" id="telephone" name="telephone" placeholder="DDD + Número do celular" >
+                    <input type="tel" id="telephone" name="telephone" placeholder="DDD + Número do celular" required>
                 </div>
                 <div class="input-btn">
                     <button type="submit">Próximo passageiro</button>

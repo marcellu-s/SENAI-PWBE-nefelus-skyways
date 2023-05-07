@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    background-color: #333;
+}
+
+header .back-page {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.back-page a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.back-page a:hover {
+    color: #999;
+}
+
+.register-passenger-area {
+    padding: 3rem 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.register-passenger-header {
+    margin-bottom: 3rem;
+}
+
+.register-passenger-header h1 {
+    font-size: 1.35rem;
+    text-align: center;
+}
+
+
+.input-control {
+    width: 100%;
+    border: 1px solid #333;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.input-control label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.8rem;
+}
+
+.input-control input {
+    width: 100%;
+    outline: none;
+    border: none;
+
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.input-btn button {
+    border-radius: 16px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: #fff;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+
+    transition: background-color 0.3s;
+
+    display: block;
+    margin: 0 auto;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+
+.input-btn button:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+.input-control select {
+    outline: none;
+    border: none;
+}

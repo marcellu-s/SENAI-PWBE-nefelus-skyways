@@ -110,3 +110,7 @@ tr td {
         overflow-x: scroll;
     }
 }
+
+.response-query-selection.hide {
+    display: none;
+}

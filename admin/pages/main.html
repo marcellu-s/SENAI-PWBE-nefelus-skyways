@@ -95,74 +95,63 @@
 
         <div class="dashboard">
             <div class="dashboard-display total-flights">
-                <span>----</span>
-                <select name="query1" id="query1">
+                <span id="record-counter">----</span>
+                <select id="view">
                     <option value="" selected disabled>Visualizar</option>
-                    <option value="">Voos realizados</option>
-                    <option value="">Passageiros atendidos</option>
-                    <option value="">Aeroportos em operação</option>
-                    <option value="">Aeronaves em operação</option>
+                    <option value="aeroportos">Aeroportos</option>
+                    <option value="avioes">Aviões</option>
+                    <option value="passageiros">Passageiros</option>
+                    <option value="cadastros">Cadastros</option>
                 </select>
             </div>
             <div class="dashboard-display">
                 <span>Adicionar</span>
-                <select name="query1" id="query1">
+                <select id="add">
                     <option value="" selected disabled>---</option>
-                    <option value="">Voo</option>
-                    <option value="">Avião</option>
-                    <option value="">Aeroporto</option>
-                    <option value="">Cidade</option>
+                    <option value="voo">Voo</option>
+                    <option value="aviao">Avião</option>
+                    <option value="aeroporto">Aeroporto</option>
+                    <option value="cidade">Cidade</option>
                 </select>
             </div>
             <div class="dashboard-display">
                 <span>Ir para relatório</span>
-                <i class="bi bi-link"></i>
+                <a href="#"><i class="bi bi-link"></i></a>
             </div>
         </div>
         
-        <div class="response-query-selection">
+        <div class="response-query-selection hide">
             <table>
                 <thead>
                     <tr>
-                        <caption><input type="text" placeholder="Buscar" class="input-filter"></caption>
-                        <th>IATA</th>
-                        <th>Aeroporto</th>
-                        <th>Cidade</th>
-                        <th>Estado</th>
-                        <th>Editar</th>
-                        <th>Remover</th>
+                        <!-- <caption><input type="text" placeholder="Buscar" class="input-filter"></caption> -->
+                        <th>---</th>
+                        <th>---</th>
+                        <th>---</th>
+                        <th>---</th>
+                        <th>---</th>
+                        <th>---</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>CGH</td>
-                        <td>Aeroporto Internacional de Congonhas</td>
-                        <td>Congonhas</td>
-                        <td>São Paulo</td>
-                        <td><a href="#"><i class="bi bi-pen"></i></a></td>
-                        <td><a href="#"><i class="bi bi-x-lg"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>CGH</td>
-                        <td>Aeroporto Internacional de Congonhas</td>
-                        <td>Congonhas</td>
-                        <td>São Paulo</td>
-                        <td><a href="#"><i class="bi bi-pen"></i></a></td>
-                        <td><a href="#"><i class="bi bi-x-lg"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>CGH</td>
-                        <td>Aeroporto Internacional de Congonhas</td>
-                        <td>Congonhas</td>
-                        <td>São Paulo</td>
-                        <td><a href="#"><i class="bi bi-pen"></i></a></td>
-                        <td><a href="#"><i class="bi bi-x-lg"></i></a></td>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>---</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </main>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- JavaScript -->
     <script src="../../assets/js/mobileMenu.js"></script>
+    <script src="../assets/js/main/optAdd.js"></script>
+    <script src="../assets/js/main/optView.js"></script>
 </body>
 </html>
