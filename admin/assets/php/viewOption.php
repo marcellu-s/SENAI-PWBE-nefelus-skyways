@@ -20,8 +20,7 @@ function createTable($optionParam) {
                     'Modelo',
                     'Capacidade de carga - kg',
                     'Velocidade de cruzeiro - km/h',
-                    'Editar',
-                    'Remover'
+                    'Detalhes'
                 ]
             ];
 
@@ -31,7 +30,7 @@ function createTable($optionParam) {
 
                 array_pop($row);
 
-                array_push($row, "<a href='$id'><i class='bi bi-pen'></i></a>", "<a href='$id'><i class='bi bi-x-lg'></i></a>");
+                array_push($row, "<a href='./detalhes.php?id=$id&op=aviao' target='_blank'><i class='bi bi-link'></i></a>");
 
                 array_push($array, $row);
             }
@@ -55,8 +54,7 @@ function createTable($optionParam) {
                     'Aeroporto',
                     'Cidade',
                     'Estado',
-                    'Editar',
-                    'Remover'
+                    'Detalhes'
                 ]
             ];
 
@@ -66,7 +64,7 @@ function createTable($optionParam) {
 
                 array_pop($row);
 
-                array_push($row, "<a href='$id'><i class='bi bi-pen'></i></a>", "<a href='$id'><i class='bi bi-x-lg'></i></a>");
+                array_push($row, "<a href='./detalhes.php?id=$id&op=aeroporto' target='_blank'><i class='bi bi-link'></i></a>");
 
                 array_push($array, $row);
             }
@@ -98,7 +96,7 @@ function createTable($optionParam) {
 
                 array_pop($row);
 
-                array_push($row, "<a href='$id'><i class='bi bi-link'></i></a>");
+                array_push($row, "<a href='./detalhes.php?id=$id&op=cadastro' target='_blank'><i class='bi bi-link'></i></a>");
 
                 array_push($array, $row);
             }
@@ -106,7 +104,35 @@ function createTable($optionParam) {
             break;
         }
 
-        case 'testpassageiros': {
+        case 'passageiros': {
+
+            $query = "SELECT p_nome, p_sobrenome, cpf, nacionalidade, sexo, id_passageiro FROM passageiro
+            INNER JOIN pessoa
+            ON pessoa.id_pessoa = passageiro.fk_pessoa";
+
+            $result = mysqli_query($conn, $query);
+
+            $array = [
+                [
+                    'Nome',
+                    'Sobrenome',
+                    'CPF',
+                    'Nacionalidade',
+                    'Gênero',
+                    'Detalhes'
+                ]
+            ];
+
+            while ($row = mysqli_fetch_row($result)) {
+
+                $id = $row[count($row) - 1];
+
+                array_pop($row);
+
+                array_push($row, "<a href='./detalhes.php?id=$id&op=passageiro' target='_blank''><i class='bi bi-link'></i></a>");
+
+                array_push($array, $row);
+            }
 
             break;
         }

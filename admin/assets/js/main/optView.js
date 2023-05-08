@@ -15,9 +15,6 @@ optView.addEventListener('change', function() {
             let json = JSON.parse(response);
 
             if (json == null) {
-                
-                document.querySelector('.dashboard #record-counter').textContent = '----';
-
                 window.alert('Sem registros');
                 return;
             }
@@ -63,9 +60,7 @@ optView.addEventListener('change', function() {
 
                     let tbodyTd = document.createElement('td');
 
-                    if ((json[i].length - 2) == data) {
-                        tbodyTd.innerHTML = json[i][data];
-                    } else if ((json[i].length - 1) == data) {
+                    if ((json[i].length - 1) == data) {
                         tbodyTd.innerHTML = json[i][data];
                     } else {
                         tbodyTd.textContent = json[i][data];

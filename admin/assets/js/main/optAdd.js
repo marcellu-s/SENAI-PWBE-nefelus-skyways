@@ -19,6 +19,11 @@ function redirect(option) {
     } else if (option == 'cidade') {
         
         window.location.href = './add_cidade.php';    
+
+    } else if (option == 'funcionario') {
+
+        window.location.href = './add_funcionario.php';
+
     }
 }
 
