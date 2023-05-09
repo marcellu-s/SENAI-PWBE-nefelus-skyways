@@ -14,7 +14,7 @@ if (isset($_GET['id']) && isset($_GET['op'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../assets/img/icons/favicon.ico" type="image/x-icon">
-    <title>aqui</title>
+    <title>Sem registro</title>
     <!-- BOOTSTRAP ICONS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- FONTS GOOGLE -->
@@ -35,7 +35,7 @@ if (isset($_GET['id']) && isset($_GET['op'])) {
     <main>
         <section class="register-passenger-area">
             <div class="register-passenger-header">
-                <h1 class="title">Detalhes do</h1>
+                <h1 class="title">Sem registro</h1>
             </div>
             <form>
                 <input type="hidden" name="id" value="<?php echo($id); ?>" id="id">

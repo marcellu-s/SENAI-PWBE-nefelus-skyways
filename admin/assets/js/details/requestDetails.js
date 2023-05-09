@@ -9,16 +9,19 @@ function requestAjax(id, op) {
         },
         success: function(response){
 
-            const data = JSON.parse(response);
-
-            console.log(data);
+            try {
+                var data = JSON.parse(response);
+            } catch (error) {
+                window.alert('Não foi possível encontrar este registro!')
+                return;
+            }
 
             const dataKeys = Object.keys(data);
             const dataValues = Object.values(data);
             
             const form = document.querySelector('form');
 
-            document.querySelector('.title').textContent = `Detalhes do ${dataValues[0]}`;
+            document.querySelector('.title').textContent = `Detalhes do(a) ${dataValues[0]}`;
             document.querySelector('title').textContent = `Detalhes - ${dataValues[0]}`;
 
             for (let i = 0; i < dataKeys.length; i++) {

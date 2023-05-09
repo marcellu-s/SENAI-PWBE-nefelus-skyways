@@ -160,7 +160,7 @@ function createTable($optionParam) {
 
         case 'funcionarios': {
 
-            $query = "SELECT p_nome, p_sobrenome, data_nasc, sexo, nacionalidade, email, telefone, funcao, id_cadastro FROM cadastro
+            $query = "SELECT p_nome, p_sobrenome, data_nasc, sexo, nacionalidade, email, telefone, funcao, id_funcionario FROM cadastro
             INNER JOIN pessoa
             ON pessoa.id_pessoa = cadastro.fk_pessoa
             INNER JOIN funcionario

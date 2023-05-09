@@ -98,19 +98,19 @@
             <form>
                 <div class="input-control">
                     <label for="name">Nome</label>
-                    <input type="text" name="name" id="name" placeholder="Seu nome" required>
+                    <input type="text" name="name" id="name" placeholder="Seu nome" maxlength="50" >
                 </div>
                 <div class="input-control">
                     <label for="email">E-mail</label>
-                    <input type="email" name="email" id="email" placeholder="Seu E-mail" required>
+                    <input type="email" name="email" id="email" placeholder="Seu E-mail" maxlength="50" >
                 </div>
                 <div class="input-control">
                     <label for="subject">Assunto</label>
-                    <input type="text" name="subject" id="subject" placeholder="Motivo do contato" required>
+                    <input type="text" name="subject" id="subject" placeholder="Motivo do contato" maxlength="75" >
                 </div>
                 <div class="input-control">
                     <label for="message">Mensagem</label>
-                    <textarea name="message" id="message" cols="30" rows="5" placeholder="Informações adicionais"></textarea>
+                    <textarea name="message" id="message" cols="30" rows="5" placeholder="Informações adicionais" maxlength="150" ></textarea>
                 </div>
                 <button type="submit">Enviar</button>
             </form>
@@ -181,6 +181,9 @@
         </div>
     </footer>
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="../assets/js/mobileMenu.js"></script>
+    <script src="../assets/js/contato/sendContact.js"></script>
 </body>
 </html>
