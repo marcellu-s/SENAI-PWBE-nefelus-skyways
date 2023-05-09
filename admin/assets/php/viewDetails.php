@@ -60,7 +60,22 @@ if ($op) {
     
         case 'passageiro': {
     
+            $query = "SELECT * FROM aviao
+            INNER JOIN aeroporto
+            ON aeroporto.id_aeroporto = aviao.fk_aeroporto
+            WHERE aviao.id_aviao = '$id'";
     
+            $result = mysqli_query($conn, $query);
+    
+            $assoc = mysqli_fetch_assoc($result);
+    
+            $array = [
+                'matrícula da aeronave' => $assoc['matricula'],
+                'modelo' => $assoc['modelo'],
+                'capacidade de carga' => $assoc['carga'].' kg',
+                'velocidade de cruzeiro' => $assoc['velocidade'].' km/h',
+                'aeroporto de origem' => $assoc['nome']
+            ];
     
             break;
         }

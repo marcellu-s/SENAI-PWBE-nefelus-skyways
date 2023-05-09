@@ -105,6 +105,46 @@ tr td {
     padding: 1.5rem 1rem;
 }
 
+.pagination {
+    margin-top: 2rem;
+}
+
+.links-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.links-wrapper a, .links-wrapper p {
+    font-family: monospace;
+    background-color: #333;
+    border: 1px solid #333;
+    font-weight: 500;
+    color: #fff;
+
+    cursor: pointer;
+
+    padding: 0.15rem 0.45rem;
+}
+
+.links-wrapper p.selecionado {
+    opacity: 0.8;
+}
+
+.links-wrapper a:hover, .links-wrapper p:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* .pagination a {
+    display: none;
+} */
+
+a.show {
+    display: block;
+}
+
 @media screen and (max-width: 668px) {
     .response-query-selection {
         overflow-x: scroll;

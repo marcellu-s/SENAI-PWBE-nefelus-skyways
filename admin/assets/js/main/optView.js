@@ -1,24 +1,60 @@
 const optView = document.querySelector('#view');
 const responseQuerySelection = document.querySelector('.response-query-selection');
 
-optView.addEventListener('change', function() {
+function getLink() {
+    
+    try {
+
+        var links = document.querySelectorAll('.links-wrapper a');
+
+        links.forEach((link) => {
+
+            link.addEventListener('click', (event) => {
+
+                event.preventDefault();
+    
+                let linkTarget = link.className;
+
+                linkTarget = linkTarget.split(' ');
+
+                ajaxRequest(linkTarget[1], linkTarget[0]);
+
+            });
+        });
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+function ajaxRequest(escolha, pagina='') {
 
     $.ajax({
+        async: true,
         method: "GET",
         url: "../assets/php/viewOption.php",
         data: {
-            choice: this.value
+            choice: escolha,
+            pag: pagina
         },
-        async: true,
         success: function( response ) {
-    
-            let json = JSON.parse(response);
 
-            if (json == null) {
+
+            if (response == '' ) {
                 window.alert('Sem registros');
                 return;
             }
-        
+
+            let json = JSON.parse(response);
+
+            let jsonMainData = JSON.parse(json[0]);
+            let jsonPagination = JSON.parse(json[1]);
+
+            let linskWrapper = document.querySelector('.links-wrapper');
+
+            linskWrapper.innerHTML = '';
+
             responseQuerySelection.classList.remove('hide');
 
             // Trocando o THEAD
@@ -28,7 +64,7 @@ optView.addEventListener('change', function() {
 
             let theadTr = document.createElement('tr');
 
-            json[0].forEach((data) => {
+            jsonMainData[0].forEach((data) => {
 
                 let th = document.createElement('th');
                 th.textContent = data;
@@ -52,18 +88,18 @@ optView.addEventListener('change', function() {
             // ADICIONANDO NOVOS TR
 
 
-            for (let i = 1; i < json.length; i++) {
+            for (let i = 1; i < jsonMainData.length; i++) {
 
                 let tbodyTr = document.createElement('tr');
 
-                for (let data = 0; data < json[i].length; data++) {
+                for (let data = 0; data < jsonMainData[i].length; data++) {
 
                     let tbodyTd = document.createElement('td');
 
-                    if ((json[i].length - 1) == data) {
-                        tbodyTd.innerHTML = json[i][data];
+                    if ((jsonMainData[i].length - 1) == data) {
+                        tbodyTd.innerHTML = jsonMainData[i][data];
                     } else {
-                        tbodyTd.textContent = json[i][data];
+                        tbodyTd.textContent = jsonMainData[i][data];
                     }
 
                     tbodyTr.appendChild(tbodyTd);
@@ -73,8 +109,22 @@ optView.addEventListener('change', function() {
 
             }
 
-            document.querySelector('.dashboard #record-counter').textContent = (json.length - 1)+' registro(s)';
+            document.querySelector('.dashboard #record-counter').textContent = (jsonMainData.length - 1)+' registro(s)';
+
+            linskWrapper.innerHTML += jsonPagination;
+
+            // jsonPagination.forEach((link) => {
+
+            //     linskWrapper.innerHTML += link;
+            // });
+
+            getLink();
 
         }
     });
+}
+
+optView.addEventListener('change', function() {
+
+    ajaxRequest(this.value)
 });
