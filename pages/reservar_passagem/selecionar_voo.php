@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 date_default_timezone_set('America/Sao_Paulo');
 
 ?>
@@ -28,18 +30,17 @@ date_default_timezone_set('America/Sao_Paulo');
 </head>
 
 <body>
-    <header>
+<header>
         <div id="navbar">
             <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <div class="flex lg:flex-1">
-                    <a href="../../index.html" class="-m-1.5 p-1.5">
+                    <a href="../../index.php" class="-m-1.5 p-1.5">
                         <span class="sr-only">Your Company</span>
                         <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
                     </a>
                 </div>
                 <div class="flex lg:hidden">
-                    <button type="button"
-                        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
+                    <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
                         id="open-menu">
                         <span class="sr-only">Open main menu</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -50,15 +51,26 @@ date_default_timezone_set('America/Sao_Paulo');
                     </button>
                 </div>
                 <div class="hidden lg:flex lg:gap-x-12">
-                    <a href="../../index.html" class="text-sm font-semibold leading-6 text-white">Início</a>
-                    <a href="../../pages/reservar_passagem/reservar_passagem.html"
-                        class="text-sm font-semibold leading-6 text-white in-page">Selecionar voo</a>
-                    <a href="#" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
-                    <a href="#" class="text-sm font-semibold leading-6 text-white">Contato</a>
+                    <a href="../../index.php" class="text-sm font-semibold leading-6 text-white">Início</a>
+                    <a href="./reservar_passagem/reservar_passagem.php" class="text-sm font-semibold leading-6 text-white in-page">Registrar passageiro</a>
+                    <a href="../ofertas.php" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
+                    <a href="../contato.php" class="text-sm font-semibold leading-6 text-white">Contato</a>
+                    <?php
+                    if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+                        echo("<a href='../../admin/pages/main.php' class='text-sm font-semibold leading-6 text-white'>Área de trabalho</a>");
+                    } else if (isset($_SESSION['login'])) {
+                        echo("<a href='../../client/pages/myAccount.php' class='text-sm font-semibold leading-6 text-white'>Meu perfil</a>");
+                    }
+                    ?>
                 </div>
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a href="../../pages/login.php" class="text-sm font-semibold leading-6 text-white mr-8">Entrar<span
-                            aria-hidden="true">&rarr;</span></a>
+                    <?php 
+                    if (isset($_SESSION['login'])) {
+                        echo("<a href='../../assets/php/logoutProcess.php?logout=true' class='text-sm font-semibold leading-6 text-white mr-8'>Deslogar<span aria-hidden='true'>&rarr;</span></a>");
+                    } else {
+                        echo("<a href='../login.php' class='text-sm font-semibold leading-6 text-white mr-8'>Entrar<span aria-hidden='true'>&rarr;</span></a>");
+                    }
+                    ?>
                 </div>
             </nav>
             <!-- Mobile menu, show/hide based on menu open state. -->
@@ -68,14 +80,14 @@ date_default_timezone_set('America/Sao_Paulo');
                 <div
                     class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-mobile-menu px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div class="flex items-center justify-between">
-                        <a href="../../index.html" class="-m-1.5 p-1.5">
+                        <a href="../../index.php" class="-m-1.5 p-1.5">
                             <span class="sr-only">Your Company</span>
                             <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
                         </a>
                         <button type="button" class="-m-2.5 rounded-md p-2.5 text-white" id="close-menu">
                             <span class="sr-only">Close menu</span>
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
@@ -83,20 +95,30 @@ date_default_timezone_set('America/Sao_Paulo');
                     <div class="mt-6 flow-root">
                         <div class="-my-6 divide-y divide-white">
                             <div class="space-y-2 py-6">
-                                <a href="../../index.html"
+                                <a href="../../index.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Início</a>
-                                <a href="../../pages/reservar_passagem/reservar_passagem.html"
-                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Selecionar
-                                    voo</a>
-                                <a href="#"
+                                <a href="../../pages/reservar_passagem/reservar_passagem.php"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Registrar passageiro</a>
+                                <a href="../../pages/ofertas.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Ofertas</a>
-                                <a href="#"
+                                <a href="../../pages/contato.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Contato</a>
+                                <?php
+                                if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+                                    echo("<a href='../../admin/pages/main.php' class='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white'>Área de trabalho</a>");
+                                } else if (isset($_SESSION['login'])) {
+                                    echo("<a href='../../client/pages/myAccount.php' class='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white'>Meu perfil</a>");
+                                }
+                                ?>
                             </div>
                             <div class="py-6">
-                                <a href="../../pages/login.html"
-                                    class="text-sm font-semibold leading-6 text-white">Entrar<span
-                                        aria-hidden="true">&rarr;</span></a>
+                                <?php 
+                                if (isset($_SESSION['login'])) {
+                                    echo("<a href='../../assets/php/logoutProcess.php?logout=true' class='text-sm font-semibold leading-6 text-white mr-8'>Deslogar<span aria-hidden='true'>&rarr;</span></a>");
+                                } else {
+                                    echo("<a href='../login.php' class='text-sm font-semibold leading-6 text-white mr-8'>Entrar<span aria-hidden='true'>&rarr;</span></a>");
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
