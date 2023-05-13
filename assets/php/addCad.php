@@ -59,10 +59,11 @@ mysqli_query($conn, $queryCadastro);
 if (mysqli_affected_rows($conn)) {
 
     $_SESSION['callback'] = "<script>window.alert('Cadastro realizado com sucesso!')</script>";
-    header("location: ../../index.php");
+    header("location: ../../pages/login.php");
 } else {
 
     $_SESSION['callback'] = "<script>window.alert('Falha ao realizar o cadastro!')</script>";
+    header("location: ../../pages/cadastro.php");
 }
 
 ?>
