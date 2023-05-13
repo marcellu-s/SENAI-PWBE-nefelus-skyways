@@ -8,6 +8,11 @@ function postData(url = "", data = {}) {
             let data = JSON.parse(response);
 
             window.alert(data.msg);
+
+            document.querySelector('.input-control #name').value = "";
+            document.querySelector(".input-control #email").value = "";
+            document.querySelector(".input-control #subject").value = "";
+            document.querySelector(".input-control #message").value  ="";
         }
     });
 }

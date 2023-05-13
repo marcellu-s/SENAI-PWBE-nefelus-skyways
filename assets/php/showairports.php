@@ -1,7 +1,7 @@
 <?php
 
 // Conexão ao banco de dados por PDO
-$conn = new PDO('mysql:host=localhost;dbname=ajax', 'root', 'SQL04df478fpk8');
+include_once "../../ops/db.php";
 
 if (isset($_POST['q'])) {
     // Caso seja passado um parâmetro
@@ -17,18 +17,17 @@ if (isset($_POST['q'])) {
 $prepare = $conn->prepare($query);
 $prepare->execute();
 
-// Resultado a partir da query
-$result = $prepare->fetchAll();
-$rowCount = $prepare->rowCount(); 
+// Obtendo o resultado como um objeto mysqli_result
+$result = $prepare->get_result();
 
-// Determinado o dado e retornando o mesmo
+// Determinando o dado e retornando o mesmo
 $data = null;
 
-if ($rowCount > 0) {
+if ($result->num_rows > 0) {
 
-    foreach($result as $row) {
-        $data = "<span>$row[nome]</span>";
-
+    // Iterando sobre o resultado
+    while($row = $result->fetch_assoc()) {
+        $data = "<span>" . $row['nome'] . "</span>";
         echo($data);
     }
 

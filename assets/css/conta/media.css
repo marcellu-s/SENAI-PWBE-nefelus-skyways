@@ -1,0 +1,19 @@
+@media screen and (max-width: 640px) {
+    body {
+      max-width: 90%;
+    }
+    .br-person p{
+        font-size: 15px;
+    }
+  }
+  
+  /* Usando cortes de palavra para evitar que o texto se estenda além da largura da tela */
+  p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+@media only screen and (max-width: 600px) {
+    .br-person h1 {
+      font-size: 25px;
+    }
+  }

@@ -73,8 +73,6 @@ function ajaxSearch(search, inputRefence) {
         });
     }
 
-
-
     $.ajax({
         method: "POST",
         url: "../../assets/php/showairports.php",

@@ -1,22 +1,25 @@
 // Ao clicar em "Não sou brasileiro e não tenho CPF", desabilitar o input de CPF
 
-const inputNoCpf = document.querySelector(".input-control #no-cpf");
-const inputCpf = document.querySelector('.input-control #cpf');
-const labelCpf = document.querySelector('.input-control #label-cpf');
+const inputCPF = document.querySelector('.input-control #cpf');
+const labelCPF = document.querySelector('.input-control #cpf-label');
+const inputCheckboxNoCPF = document.querySelector('.input-control #no-cpf');
 
-inputNoCpf.addEventListener("change", function() {
+inputCheckboxNoCPF.addEventListener('change', (event) => {
     
-    if (this.checked) {
-        inputCpf.required = false;
-        inputCpf.disabled = true;
+    if (event.target.checked) {
 
-        inputCpf.classList.add("input-cpf-disabled");
-        labelCpf.classList.add("input-cpf-disabled");
+        inputCPF.style.opacity = 0.5;
+        labelCPF.style.opacity = 0.5;
+
+        inputCPF.value = '';
+        inputCPF.required = false;
+        inputCPF.disabled = true;
     } else {
-        inputCpf.required = true;
-		inputCpf.disabled = false;
 
-        inputCpf.classList.remove("input-cpf-disabled");
-        labelCpf.classList.remove("input-cpf-disabled");
+        inputCPF.style.opacity = 1;
+        labelCPF.style.opacity = 1;
+
+        inputCPF.disabled = false;
+        inputCPF.required = true;
     }
-});
+})

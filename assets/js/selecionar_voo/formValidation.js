@@ -12,9 +12,10 @@ form.addEventListener('submit', (evento) => {
 
     if (inputsChecked.length > 1 || inputsChecked.length < 1) {
 
+        
         window.alert('Selecione apenas um para continuar!');
         return
     }
-
-    console.log('pode passar');
+    
+    form.submit();
 });

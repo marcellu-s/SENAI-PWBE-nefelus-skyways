@@ -166,6 +166,7 @@ header a.in-page {
     display: block;
     margin: 0 auto;
     margin-top: 3rem;
+    cursor: pointer;
 }
 
 .input-btn button:hover {

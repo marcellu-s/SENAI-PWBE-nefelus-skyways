@@ -120,8 +120,32 @@ function isCpfValid(cpf) {
     if (cpf.match(pattern)) {
 
         cpf = cpf.replace(pattern, "$1$2$3$4");
+
         inputCpf.value = cpf;
-        return true;
+
+        if (!(cpf.split('').every(char => char === cpf[0]))) {
+            let num = 0;
+            let pesos = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 0];
+            for (let i = 0; i < 10; i++) {
+                num += parseInt(cpf[i]) * pesos[i+1];
+            };
+    
+            let resto = num % 11;
+            num = 0;
+            dig1 = (resto === 0 || resto === 1) ? 0 : 11 - resto;
+    
+            for (let i = 0; i < 11; i++) {
+                num += parseInt(cpf[i]) * pesos[i];
+            };
+    
+            resto = num % 11;
+            dig2 = (resto === 0 || resto === 1) ? 0 : 11 - resto;
+    
+            return (dig1 === parseInt(cpf[9]) && dig2 == parseInt(cpf[10])) ? true : false;
+    
+        } else {
+            return false;
+        };
     }
 
     return false;
@@ -204,6 +228,8 @@ function isAllDatesValid(dateBirth, passportDateIssue, rgDateIssue) {
     let checkPassportDateIssue = new Date(passportDateIssue);
     let checkRgDateIssue = new Date(rgDateIssue);
 
+    debugger;
+
     if ((checkPassportDateIssue <= checkDateBirth) || (checkRgDateIssue <= checkDateBirth)) {
 
         return false;
@@ -219,6 +245,9 @@ form.addEventListener('submit', (event) => {
 
     // Elementos input
 
+    const paginaForm = document.querySelectorAll('#page-form').value;
+    const totalPassageiros = document.querySelector('#total_passenger').value;
+
     const inputFirstName = document.querySelector('.input-control #first-name');
     const inputLastName = document.querySelector('.input-control #last-name');
     const inputDateBirth = document.querySelector('.input-control #date-of-birth');
@@ -226,8 +255,8 @@ form.addEventListener('submit', (event) => {
     const inputNationality = document.querySelector('.input-control #nationality');
     const inputPassport = document.querySelector('.input-control #passport');
     const inputPassportDateIssue = document.querySelector('.input-control #passport-date-of-issue');
-    const inputRg = document.querySelector('.input-control #rg');
-    const inputRgDateIssue = document.querySelector('.input-control #rg-date-of-issue');
+    // const inputRg = document.querySelector('.input-control #rg');
+    // const inputRgDateIssue = document.querySelector('.input-control #rg-date-of-issue');
     const inputCpf = document.querySelector('.input-control #cpf');
     const inputNoCpf = document.querySelector('.input-control #no-cpf').checked; // Checkbox
     const inputEmail = document.querySelector('.input-control #email');
@@ -236,86 +265,147 @@ form.addEventListener('submit', (event) => {
 
     // Validação individual
 
-    if (inputFirstName.value == '' || !isNameValid(inputFirstName.value)) {
+    console.log(paginaForm)
+
+    if (paginaForm == 'cadastro') {
+
+
+        console.log('aaaaaaaaaaaaa')
     
-        window.alert('Campo PRIMEIRO NOME inválido ou vazio!');
-        return;
-    }
 
-    if (inputLastName.value == '' || !isNameValid(inputLastName.value)) {
+        if (inputFirstName.value == '' || !isNameValid(inputFirstName.value)) {
 
-        window.alert('Campo ÚLTIMO NOME inválido ou vazio!');
-        return;
-    }
+            window.alert('Campo PRIMEIRO NOME inválido ou vazio!');
+            return;
+        }
+    
+        if (inputLastName.value == '' || !isNameValid(inputLastName.value)) {
+    
+            window.alert('Campo ÚLTIMO NOME inválido ou vazio!');
+            return;
+        }
+    
+        if (inputDateBirth.value == '' || !isDateValid(inputDateBirth.value)) {
+    
+            window.alert('Campo DATA DE NASCIMENTO inválida ou vazia!');
+            return;
+        }
+    
+        if (inputGender.value == '') {
+    
+            window.alert('Campo GÊNERO vazio!');
+            return;
+        }
+    
+        if (inputNationality.value == '') {
+    
+            window.alert('Campo NACIONALIDADE vazio!');
+            return;
+        }
+    
+        if (inputPassport.value == '' || !isPassportValid(inputPassport.value)) {
+    
+            window.alert('Campo PASSAPORTE inválido ou vazio!');
+            return;
+        }
+    
+        if (inputPassportDateIssue.value == '' || !isDateIssueValid(inputPassportDateIssue.value)) {
+    
+            window.alert('Campo DATA DE EMISSÃO do PASSAPORTE inválido ou vazio! OBS: O passaporte é válido durante 10 anos, após sua emissão');
+            return;
+        }
+    
+        if ((inputCpf.value == '' || !isCpfValid(inputCpf.value)) && !inputNoCpf) {
+    
+            window.alert('Campo CPF inválido ou vazio!');
+            return;
+        }
+    
+        if (inputEmail.value == '' || !isEmailValid(inputEmail.value)) {
+    
+            window.alert('Campo E-MAIL inválido ou vazio!');
+            return;
+        }
+    
+        if (inputDdi.value == '' || !isDDIValid(inputDdi.value)) {
+    
+            window.alert('Campo DDI inválido ou vazio!');
+        }
+    
+        if (inputTelephone.value == '' || !isTelephoneValid(inputTelephone.value)) {
+    
+            window.alert('Campo TELEFONE CELULAR inválido ou vazio!');
+            return;
+        }
+    
+        if (!isAllDatesValid(inputDateBirth.value, inputPassportDateIssue.value, inputRgDateIssue.value)) {
+    
+            window.alert('As datas de emissão de documentos não podem ser menores que a de seu nascimento!');
+            return;
+        }
 
-    if (inputDateBirth.value == '' || !isDateValid(inputDateBirth.value)) {
+    } else if (paginaForm == 'passageiro') {
 
-        window.alert('Campo DATA DE NASCIMENTO inválida ou vazia!');
-        return;
-    }
+        console.log('bbbbbbbbbb')
 
-    if (inputGender.value == '') {
 
-        window.alert('Campo GÊNERO vazio!');
-        return;
-    }
+        for(passageiro = 0; passageiro < totalPassageiros; passageiro++) {
 
-    if (inputNationality.value == '') {
+            if (inputFirstName.value == '' || !isNameValid(inputFirstName.value)) {
+    
+                window.alert('Campo PRIMEIRO NOME inválido ou vazio!');
+                return;
+            }
+        
+            if (inputLastName.value == '' || !isNameValid(inputLastName.value)) {
+        
+                window.alert('Campo ÚLTIMO NOME inválido ou vazio!');
+                return;
+            }
+        
+            if (inputDateBirth.value == '' || !isDateValid(inputDateBirth.value)) {
+        
+                window.alert('Campo DATA DE NASCIMENTO inválida ou vazia!');
+                return;
+            }
+        
+            if (inputGender.value == '') {
+        
+                window.alert('Campo GÊNERO vazio!');
+                return;
+            }
+        
+            if (inputNationality.value == '') {
+        
+                window.alert('Campo NACIONALIDADE vazio!');
+                return;
+            }
+        
+            if (inputPassport.value == '' || !isPassportValid(inputPassport.value)) {
+        
+                window.alert('Campo PASSAPORTE inválido ou vazio!');
+                return;
+            }
+        
+            if (inputPassportDateIssue.value == '' || !isDateIssueValid(inputPassportDateIssue.value)) {
+        
+                window.alert('Campo DATA DE EMISSÃO do PASSAPORTE inválido ou vazio! OBS: O passaporte é válido durante 10 anos, após sua emissão');
+                return;
+            }
+        
+            if ((inputCpf.value == '' || !isCpfValid(inputCpf.value)) && !inputNoCpf) {
+        
+                window.alert('Campo CPF inválido ou vazio!');
+                return;
+            }
+        
+            if (!isAllDatesValid(inputDateBirth.value, inputPassportDateIssue.value)) {
+        
+                window.alert('As datas de emissão de documentos não podem ser menores que a de seu nascimento!');
+                return;
+            }
+        }
 
-        window.alert('Campo NACIONALIDADE vazio!');
-        return;
-    }
-
-    if (inputPassport.value == '' || !isPassportValid(inputPassport.value)) {
-
-        window.alert('Campo PASSAPORTE inválido ou vazio!');
-        return;
-    }
-
-    if (inputPassportDateIssue.value == '' || !isDateIssueValid(inputPassportDateIssue.value)) {
-
-        window.alert('Campo DATA DE EMISSÃO do PASSAPORTE inválido ou vazio! OBS: O passaporte é válido durante 10 anos, após sua emissão');
-        return;
-    }
-
-    if (inputRg.value == '' || !isRgValid(inputRg.value)) {
-
-        window.alert('Campo RG inválido ou vazio!');
-        return;
-    }
-
-    if (inputRgDateIssue.value == '' || !isDateIssueValid(inputRgDateIssue.value)) {
-
-        window.alert('Campo DATA DE EMISSÃO do RG inválido ou vazio! OBS: O RG é válido durante 10 anos, após a emissão');
-    }
-
-    if ((inputCpf.value == '' || !isCpfValid(inputCpf.value)) && !inputNoCpf) {
-
-        window.alert('Campo CPF inválido ou vazio!');
-        return;
-    }
-
-    if (inputEmail.value == '' || !isEmailValid(inputEmail.value)) {
-
-        window.alert('Campo E-MAIL inválido ou vazio!');
-        return;
-    }
-
-    if (inputDdi.value == '' || !isDDIValid(inputDdi.value)) {
-
-        window.alert('Campo DDI inválido ou vazio!');
-    }
-
-    if (inputTelephone.value == '' || !isTelephoneValid(inputTelephone.value)) {
-
-        window.alert('Campo TELEFONE CELULAR inválido ou vazio!');
-        return;
-    }
-
-    if (!isAllDatesValid(inputDateBirth.value, inputPassportDateIssue.value, inputRgDateIssue.value)) {
-
-        window.alert('As datas de emissão de documentos não podem ser menores que a de seu nascimento!');
-        return;
     }
 
     // Envia o formulário se tudo estiver válido.

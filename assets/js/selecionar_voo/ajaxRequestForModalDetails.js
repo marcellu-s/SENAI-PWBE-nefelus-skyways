@@ -26,8 +26,8 @@ function updateModalTriggerElements() {
             // Input[type="hidden"] - Contendo o ID do voo
             let inputIdFlight = wrapperFlightElement.querySelector('.input-flight').value; 
     
-            // ajaxRequestForModalDetails(inputIdFlight);
-            
+            ajaxRequestForModalDetails(inputIdFlight);
+
             toggleModal();
         });
     });
@@ -59,12 +59,13 @@ function ajaxRequestForModalDetails(flightId) {
         async: true,
         method: "POST",
         url: "../../assets/php/dados.php",
+        dataType: "json",
         data: {
             flightID: flightId
         },
         success: function( response ) {
 
-            let data = JSON.parse(response);
+            let data = (response);
 
             headerTitle.textContent = data.title;
             flightDuration.textContent = data.duration;
@@ -75,8 +76,7 @@ function ajaxRequestForModalDetails(flightId) {
             goingToInfoDatetime.textContent = data.goingToDatetime;
             airplaneInfo.textContent = data.airPlaneInfo;
         }
-    });
-    
+    });  
 }
 
 // Atualizar elementos ativadores do modal, assim que o DOM carregar pela primeira vez;
