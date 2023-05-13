@@ -41,6 +41,9 @@
                     <button type="submit">Entrar</button>
                 </div>
             </form>
+            <div class="no-account">
+                <span>Não tem uma conta? <a href="./cadastro.php">Clique aqui!</a></span>
+            </div>
         </section>
     </main>
 </body>
