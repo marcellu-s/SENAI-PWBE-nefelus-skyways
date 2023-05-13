@@ -1,0 +1,253 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['login'])) {
+    
+    header("location: ../../pages/login.php");
+}
+
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/icons/favicon.ico" type="image/x-icon">
+    <title>Minha conta - Nefelus SkyWays</title>
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FONTS GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/edit_profile.css">
+</head>
+<body>
+    <!-- HEADER -->
+    
+    <header>
+        <div id="navbar">
+            <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <a href="../../index.php" class="-m-1.5 p-1.5">
+                        <span class="sr-only">Your Company</span>
+                        <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
+                    </a>
+                </div>
+                <div class="flex lg:hidden">
+                    <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
+                        id="open-menu">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="../../index.php" class="text-sm font-semibold leading-6 text-white">Início</a>
+                    <a href="../../pages/reservar_passagem/reservar_passagem.php" class="text-sm font-semibold leading-6 text-white">Reservar passagem</a>
+                    <a href="../../pages/ofertas.html" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
+                    <a href="../../pages/contato.html" class="text-sm font-semibold leading-6 text-white">Contato</a>
+                    <?php
+                    if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+                        echo("<a href='../../admin/pages/main.php' class='text-sm font-semibold leading-6 text-white'>Área de trabalho</a>");
+                    } else if (isset($_SESSION['login'])) {
+                        echo("<a href='./myAccount.php' class='text-sm font-semibold leading-6 text-white in-page'>Meu perfil</a>");
+                    }
+                    ?>
+                </div>
+                <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <?php 
+                    if (isset($_SESSION['login'])) {
+                        echo("<a href='../../assets/php/logoutProcess.php?logout=true' class='text-sm font-semibold leading-6 text-white mr-8'>Deslogar<span aria-hidden='true'>&rarr;</span></a>");
+                    } else {
+                        echo("<a href='../../pages/login.php' class='text-sm font-semibold leading-6 text-white mr-8'>Entrar<span aria-hidden='true'>&rarr;</span></a>");
+                    }
+                    ?>
+                </div>
+            </nav>
+            <!-- Mobile menu, show/hide based on menu open state. -->
+            <div class="lg:hidden hidden" role="dialog" aria-modal="true" id="mobile-menu">
+                <!-- Background backdrop, show/hide based on slide-over state. -->
+                <div class="fixed inset-0 z-10"></div>
+                <div
+                    class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-mobile-menu px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                    <div class="flex items-center justify-between">
+                        <a href="../../index.php" class="-m-1.5 p-1.5">
+                            <span class="sr-only">Your Company</span>
+                            <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
+                        </a>
+                        <button type="button" class="-m-2.5 rounded-md p-2.5 text-white" id="close-menu">
+                            <span class="sr-only">Close menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mt-6 flow-root">
+                        <div class="-my-6 divide-y divide-white">
+                            <div class="space-y-2 py-6">
+                                <a href="../../index.php"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Início</a>
+                                <a href="../../pages/reservar_passagem/reservar_passagem.php"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Reservar passagem</a>
+                                <a href="../../pages/ofertas.html"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Ofertas</a>
+                                <a href="../../pages/contato.html"
+                                    class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Contato</a>
+                                <?php
+                                if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+                                    echo("<a href='./admin/pages/main.php' class='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white'>Área de trabalho</a>");
+                                } else if (isset($_SESSION['login'])) {
+                                    echo("<a href='./myAccount.php' class='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white'>Meu perfil</a>");
+                                }
+                                ?>
+                            </div>
+                            <div class="py-6">
+                                <?php 
+                                if (isset($_SESSION['login'])) {
+                                    echo("<a href='./assets/php/logoutProcess.php?logout=true' class='text-sm font-semibold leading-6 text-white'>Deslogar<span aria-hidden='true'>&rarr;</span></a>");
+                                } else {
+                                    echo("<a href='./pages/login.php' class='text-sm font-semibold leading-6 text-white'>Entrar<span aria-hidden='true'>&rarr;</span></a>");
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="profile-header">
+            <div class="left">
+                <div class="profile-img">
+                    <img src="../assets/img/perfil-300x300-4.jpg" alt="">
+                </div>
+                <div class="profile-information">
+                    <ul class="profile-info">
+                        <li class="info">Nome: <span class="info-name">Marcelo Costa</span></li>
+                        <li class="info">Idade: <span class="info-age">20 anos</span></li>
+                        <li class="info">Nacionalidade: <span class="nacionality">Brasil</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+                <ul class="options">
+                    <li class="option"><button>Editar perfil</button></li>
+                    <li class="option"><button>Ver viagens feitas por mim</button></li>
+                    <li class="option"><button>Passagens pendentes</button></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="request-option-area">
+            <div class="request-edit-profile">
+                <form action="">
+                    <div class="left-profile">
+                        <div class="input-control">
+                            <label for="first-name">NOME</label>
+                            <input type="text" name="first-name" id="first-name">
+                        </div>
+                        <div class="input-control">
+                            <label for="last-name">SOBRENOME</label>
+                            <input type="text" name="last-name" id="last-name">
+                        </div>
+                        <div class="input-control">
+                            <label>DATA DE NASCIMENTO</label>
+                            <input type="date" value="25/08/2002" class="no-edit"  readonly>
+                        </div>
+                        <div class="input-control">
+                            <label>GÊNERO</label>
+                            <select name="gender" id="gender">
+                                <option value="h">Homem</option>
+                                <option value="m">Mulher</option>
+                            </select>
+                        </div>
+                        <div class="input-control">
+                            <label for="nacionality">NACIONALIDADE</label>
+                            <select name="nacionality" id="nacionality">
+                                <option value="BRA">BRASIL</option>
+                                <option value="EUA">ESTADOS UNIDOS</option>
+                            </select>
+                        </div>
+                        <div class="input-control">
+                            <label for="telephone">TELEFONE-CELULAR</label>
+                            <input type="tel" name="telephone" id="telephone">
+                        </div>
+                    </div>
+                    <div class="middle-profile">
+                        <div class="input-control">
+                            <label for="cep">CEP</label>
+                            <input type="text" name="cep" id="cep">
+                        </div>
+                        <div class="input-control">
+                            <label for="endereco">ENDERECO</label>
+                            <input type="text" name="endereco" id="endereco" readonly>
+                        </div>
+                        <div class="input-control">
+                            <label for="bairro">BAIRRO</label>
+                            <input type="text" name="bairro" id="bairro" readonly>
+                        </div>
+                        <div class="input-control">
+                            <label for="cidade">CIDADE</label>
+                            <input type="text" name="cidade" id="cidade" readonly>
+                        </div>
+                        <div class="input-control">
+                            <label for="uf">UF</label>
+                            <input type="text" name="uf" id="uf" readonly>
+                        </div>
+                    </div>
+                    <div class="right-profile">
+                        <div class="input-control">
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" class="no-edit" readonly>
+                        </div>
+                        <div class="input-control">
+                            <label for="passport">PASSAPORTE</label>
+                            <input type="text" name="passport" id="passport" class="no-edit"  readonly>
+                        </div>
+                        <div class="input-control">
+                            <label for="email">E-MAIL</label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div class="input-control">
+                            <label for="old-password">SENHA ANTIGA</label>
+                            <input type="password" name="old-password" id="old-password">
+                        </div>
+                        <div class="input-control">
+                            <label for="new-password">NOVA SENHA</label>
+                            <input type="password" name="new-password" id="new-password">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+
+        // Calcular idade
+
+        // const today = new Date();
+        // const birthDate = new Date('2002-08-25');
+        // let age = today.getFullYear() - birthDate.getFullYear();
+        // const m = today.getMonth() - birthDate.getMonth();
+        
+        // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        //     age--;
+        // }
+
+        // console.log(`Minha idade é ${age}`);
+
+    </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <?php
 
-$conn = new PDO('mysql:host=localhost;dbname=skywaysbd', 'root', '');
+$conn = new PDO('mysql:host=localhost;dbname=skywaysbd', 'root', 'SQL04df478fpk8');
 
 if (isset($_POST['q'])) {
     // Caso seja passado um parâmetro

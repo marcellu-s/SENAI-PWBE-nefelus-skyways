@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+    // OK - Pode entrar chefe!
+} else {
+    header("location: ../../pages/login.php");
+}
+
 date_default_timezone_set('America/Sao_Paulo');
 
 ?>
@@ -24,7 +32,7 @@ date_default_timezone_set('America/Sao_Paulo');
 <body>
   <header>
     <div class="back-page">
-      <a href="../pages/main.html"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
+      <a href="../pages/main.php"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
     </div>
   </header>
   <main>

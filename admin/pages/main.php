@@ -1,6 +1,17 @@
- <!DOCTYPE html>
- <html lang="pt-BR">
- <head>
+<?php
+
+session_start();
+
+if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+    // OK - Pode entrar chefe!
+} else {
+    header("location: ../../pages/login.php");
+}
+
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +32,7 @@
         <div id="navbar">
             <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <div class="flex lg:flex-1">
-                    <a href="../../index.html" class="-m-1.5 p-1.5">
+                    <a href="../../index.php" class="-m-1.5 p-1.5">
                         <span class="sr-only">Your Company</span>
                         <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
                     </a>
@@ -38,14 +49,20 @@
                     </button>
                 </div>
                 <div class="hidden lg:flex lg:gap-x-12">
-                    <a href="../../index.html" class="text-sm font-semibold leading-6 text-white">Início</a>
+                    <a href="../../index.php" class="text-sm font-semibold leading-6 text-white">Início</a>
                     <a href="../../pages/reservar_passagem/reservar_passagem.php" class="text-sm font-semibold leading-6 text-white">Reservar passagem</a>
                     <a href="../../pages/ofertas.html" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
                     <a href="../../pages/contato.html" class="text-sm font-semibold leading-6 text-white">Contato</a>
-                    <a href="./main.html" class="text-sm font-semibold leading-6 text-white in-page">Área de trabalho</a>
+                    <a href="./main.php" class="text-sm font-semibold leading-6 text-white in-page">Área de trabalho</a>
                 </div>
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a href="../../pages/login.html" class="text-sm font-semibold leading-6 text-white mr-8">Deslogar</a>
+                    <?php 
+                    if (isset($_SESSION['login'])) {
+                        echo("<a href='../../assets/php/logoutProcess.php?logout=true' class='text-sm font-semibold leading-6 text-white mr-8'>Deslogar<span aria-hidden='true'>&rarr;</span></a>");
+                    } else {
+                        echo("<a href='../../pages/login.php' class='text-sm font-semibold leading-6 text-white mr-8'>Entrar<span aria-hidden='true'>&rarr;</span></a>");
+                    }
+                    ?>
                 </div>
             </nav>
             <!-- Mobile menu, show/hide based on menu open state. -->
@@ -55,7 +72,7 @@
                 <div
                     class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-mobile-menu px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div class="flex items-center justify-between">
-                        <a href="../../index.html" class="-m-1.5 p-1.5">
+                        <a href="../../index.php" class="-m-1.5 p-1.5">
                             <span class="sr-only">Your Company</span>
                             <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
                         </a>
@@ -70,19 +87,25 @@
                     <div class="mt-6 flow-root">
                         <div class="-my-6 divide-y divide-white">
                             <div class="space-y-2 py-6">
-                                <a href="../../index.html"
+                                <a href="../../index.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Início</a>
-                                <a href="../../pages/reservar_passagem/reservar_passagem.html"
+                                <a href="../../pages/reservar_passagem/reservar_passagem.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Reservar passagem</a>
                                 <a href="../../pages/ofertas.html"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Ofertas</a>
                                 <a href="../../pages/contato.html"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Contato</a>
-                                <a href="../../pages/contato.html"
+                                <a href="./main.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Área de trabalho</a>
                             </div>
                             <div class="py-6">
-                                <a href="../../pages/login.html" class="text-sm font-semibold leading-6 text-white mr-8">Deslogar<span aria-hidden="true">&rarr;</span></a>
+                                <?php 
+                                if (isset($_SESSION['login'])) {
+                                    echo("<a href='../../assets/php/logoutProcess.php?logout=true' class='text-sm font-semibold leading-6 text-white'>Deslogar<span aria-hidden='true'>&rarr;</span></a>");
+                                } else {
+                                    echo("<a href='../../pages/login.php' class='text-sm font-semibold leading-6 text-white'>Entrar<span aria-hidden='true'>&rarr;</span></a>");
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -122,6 +145,10 @@
             <div class="dashboard-display">
                 <span>Ir para relatório</span>
                 <a href="#"><i class="bi bi-link"></i></a>
+            </div>
+            <div class="dashboard-display">
+                <span>Comentários</span>
+                <a href="./mail.php"><i class="bi bi-link"></i></a>
             </div>
         </div>
         

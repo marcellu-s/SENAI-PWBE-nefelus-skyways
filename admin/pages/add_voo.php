@@ -1,17 +1,23 @@
 <?php
 
-    session_start();
+session_start();
 
-    if (isset($_SESSION['callback'])) {
-        echo($_SESSION['callback']);
-        unset($_SESSION['callback']);
-    }
+if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+    // OK - Pode entrar chefe!
+} else {
+    header("location: ../../pages/login.php");
+}
 
-    include_once "../../ops/db.php";
+if (isset($_SESSION['callback'])) {
+    echo($_SESSION['callback']);
+    unset($_SESSION['callback']);
+}
 
-    $data_min = DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d H:i'));
-    $data_min->modify('+48 hours');
-    $data_min = $data_min->format('Y-m-d H:i:s');
+include_once "../../ops/db.php";
+
+$data_min = DateTime::createFromFormat('Y-m-d H:i', date('Y-m-d H:i'));
+$data_min->modify('+48 hours');
+$data_min = $data_min->format('Y-m-d H:i:s');
 
 ?>
 <!DOCTYPE html>
@@ -36,7 +42,7 @@
 <body>
     <header>
         <div class="back-page">
-            <a href="../pages/main.html"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
+            <a href="../pages/main.php"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
         </div>
     </header>
     <main>

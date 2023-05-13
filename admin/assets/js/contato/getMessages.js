@@ -18,3 +18,5 @@ inputSubject.addEventListener('keyup', function() {
 
   resquestComments(this.value);
 });
+
+resquestComments();

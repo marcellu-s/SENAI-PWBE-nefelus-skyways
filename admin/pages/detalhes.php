@@ -1,5 +1,13 @@
 <?php
 
+session_start();
+
+if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+    // OK - Pode entrar chefe!
+} else {
+    header("location: ../../pages/login.php");
+}
+
 if (isset($_GET['id']) && isset($_GET['op'])) {
 
     $id = $_GET['id'];
@@ -29,7 +37,7 @@ if (isset($_GET['id']) && isset($_GET['op'])) {
 <body>
     <header>
         <div class="back-page">
-            <a href="../pages/main.html"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
+            <a href="../pages/main.php"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
         </div>
     </header>
     <main>

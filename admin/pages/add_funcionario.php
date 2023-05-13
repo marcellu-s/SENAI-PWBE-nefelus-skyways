@@ -1,13 +1,19 @@
 <?php
 
-    session_start();
+session_start();
 
-    if (isset($_SESSION['callback'])) {
-        echo($_SESSION['callback']);
-        unset($_SESSION['callback']);
-    }
+if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+    // OK - Pode entrar chefe!
+} else {
+    header("location: ../../pages/login.php");
+}
 
-    include_once "../../ops/db.php";
+if (isset($_SESSION['callback'])) {
+    echo($_SESSION['callback']);
+    unset($_SESSION['callback']);
+}
+
+include_once "../../ops/db.php";
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +38,7 @@
 <body>
     <header>
         <div class="back-page">
-            <a href="../pages/main.html"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
+            <a href="../pages/main.php"><i class="bi bi-folder-symlink-fill"></i> - Voltar</a>
         </div>
     </header>
     <main>

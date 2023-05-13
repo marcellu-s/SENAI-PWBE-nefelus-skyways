@@ -1,7 +1,8 @@
 <?php
 
-include_once "./db.php";
 session_start();
+
+include_once "./db.php";
 
 $objeto = $_POST['objeto'];
 $op = $_POST['op'];

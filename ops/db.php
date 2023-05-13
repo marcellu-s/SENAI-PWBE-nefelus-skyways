@@ -2,7 +2,7 @@
 
     $host = 'localhost';
     $user = 'root';
-    $senha = '';
+    $senha = 'SQL04df478fpk8';
     $database = 'skywaysbd';
 
     $conn = new mysqli($host, $user, $senha, $database);

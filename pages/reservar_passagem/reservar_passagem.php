@@ -28,7 +28,7 @@ date_default_timezone_set('America/Sao_Paulo');
         <div id="navbar">
             <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <div class="flex lg:flex-1">
-                    <a href="../../index.php" class="-m-1.5 p-1.5">
+                    <a href="../../index.html" class="-m-1.5 p-1.5">
                         <span class="sr-only">Your Company</span>
                         <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
                     </a>
@@ -45,7 +45,7 @@ date_default_timezone_set('America/Sao_Paulo');
                     </button>
                 </div>
                 <div class="hidden lg:flex lg:gap-x-12">
-                    <a href="../../index.php" class="text-sm font-semibold leading-6 text-white">Início</a>
+                    <a href="../../index.html" class="text-sm font-semibold leading-6 text-white">Início</a>
                     <a href="../../pages/reservar_passagem/reservar_passagem.php" class="text-sm font-semibold leading-6 text-white in-page">Reservar passagem</a>
                     <a href="../../pages/ofertas.html" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
                     <a href="../../pages/contato.html" class="text-sm font-semibold leading-6 text-white">Contato</a>
@@ -61,7 +61,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <div
                     class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-mobile-menu px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div class="flex items-center justify-between">
-                        <a href="../../index.php" class="-m-1.5 p-1.5">
+                        <a href="../../index.html" class="-m-1.5 p-1.5">
                             <span class="sr-only">Your Company</span>
                             <img class="h-12 w-auto" src="../../assets/img/icons/logo.png" alt="">
                         </a>
@@ -76,7 +76,7 @@ date_default_timezone_set('America/Sao_Paulo');
                     <div class="mt-6 flow-root">
                         <div class="-my-6 divide-y divide-white">
                             <div class="space-y-2 py-6">
-                                <a href="../../index.php"
+                                <a href="../../index.html"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Início</a>
                                 <a href="../../pages/reservar_passagem/reservar_passagem.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Reservar passagem</a>
@@ -86,7 +86,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Contato</a>
                             </div>
                             <div class="py-6">
-                                <a href="../../pages/login.php" class="text-sm font-semibold leading-6 text-white">Entrar<span aria-hidden="true">&rarr;</span></a>
+                                <a href="../../pages/login.html" class="text-sm font-semibold leading-6 text-white">Entrar<span aria-hidden="true">&rarr;</span></a>
                             </div>
                         </div>
                     </div>

@@ -43,7 +43,7 @@ date_default_timezone_set('America/Sao_Paulo');
             <div id="navbar">
                 <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div class="flex lg:flex-1">
-                        <a href="./index.html" class="-m-1.5 p-1.5">
+                        <a href="./index.php" class="-m-1.5 p-1.5">
                             <span class="sr-only">Your Company</span>
                             <img class="h-12 w-auto" src="./assets/img/icons/logo.png" alt="">
                         </a>
@@ -60,7 +60,7 @@ date_default_timezone_set('America/Sao_Paulo');
                         </button>
                     </div>
                     <div class="hidden lg:flex lg:gap-x-12">
-                        <a href="./index.html" class="text-sm font-semibold leading-6 text-white in-page">Início</a>
+                        <a href="./index.php" class="text-sm font-semibold leading-6 text-white in-page">Início</a>
                         <a href="./pages/reservar_passagem/reservar_passagem.php" class="text-sm font-semibold leading-6 text-white">Reservar passagem</a>
                         <a href="./pages/ofertas.html" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
                         <a href="./pages/contato.html" class="text-sm font-semibold leading-6 text-white">Contato</a>
@@ -68,7 +68,7 @@ date_default_timezone_set('America/Sao_Paulo');
                         if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
                             echo("<a href='./admin/pages/main.php' class='text-sm font-semibold leading-6 text-white'>Área de trabalho</a>");
                         } else if (isset($_SESSION['login'])) {
-                            echo("<a href='./client/pages/myAccount.html' class='text-sm font-semibold leading-6 text-white'>Meu perfil</a>");
+                            echo("<a href='./client/pages/myAccount.php' class='text-sm font-semibold leading-6 text-white'>Meu perfil</a>");
                         }
                         ?>
                     </div>
@@ -116,7 +116,7 @@ date_default_timezone_set('America/Sao_Paulo');
                                     if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
                                         echo("<a href='./admin/pages/main.php' class='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white'>Área de trabalho</a>");
                                     } else if (isset($_SESSION['login'])) {
-                                        echo("<a href='./client/pages/myAccount.html' class='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white'>Meu perfil</a>");
+                                        echo("<a href='./client/pages/myAccount.php' class='-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white'>Meu perfil</a>");
                                     }
                                     ?>
                                 </div>
