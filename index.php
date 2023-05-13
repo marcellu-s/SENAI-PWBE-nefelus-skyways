@@ -62,8 +62,8 @@ date_default_timezone_set('America/Sao_Paulo');
                     <div class="hidden lg:flex lg:gap-x-12">
                         <a href="./index.php" class="text-sm font-semibold leading-6 text-white in-page">Início</a>
                         <a href="./pages/reservar_passagem/reservar_passagem.php" class="text-sm font-semibold leading-6 text-white">Reservar passagem</a>
-                        <a href="./pages/ofertas.html" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
-                        <a href="./pages/contato.html" class="text-sm font-semibold leading-6 text-white">Contato</a>
+                        <a href="./pages/ofertas.php" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
+                        <a href="./pages/contato.php" class="text-sm font-semibold leading-6 text-white">Contato</a>
                         <?php
                         if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
                             echo("<a href='./admin/pages/main.php' class='text-sm font-semibold leading-6 text-white'>Área de trabalho</a>");
@@ -108,9 +108,9 @@ date_default_timezone_set('America/Sao_Paulo');
                                         class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Início</a>
                                     <a href="./pages/reservar_passagem/reservar_passagem.php"
                                         class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Reservar passagem</a>
-                                    <a href="./pages/ofertas.html"
+                                    <a href="./pages/ofertas.php"
                                         class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Ofertas</a>
-                                    <a href="./pages/contato.html"
+                                    <a href="./pages/contato.php"
                                         class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Contato</a>
                                     <?php
                                     if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
