@@ -7,6 +7,29 @@ if (!isset($_SESSION['login'])) {
     header("location: ../../pages/login.php");
 }
 
+if (isset($_SESSION['loginID'])) {
+
+    include_once "../../ops/db.php";
+
+    $query = "SELECT * FROM cadastro
+    INNER JOIN pessoa
+    ON pessoa.id_pessoa = cadastro.fk_pessoa
+    WHERE cadastro.id_cadastro = $_SESSION[loginID]";
+
+    $result = $conn->query($query);
+
+    // Se por algum motivo, não encontrar a conta
+
+    if ($result->num_rows != 1) {
+
+        $_SESSION['callback'] = "<script>window.alert('Algo aconteceu e não encontramos sua conta, tente fazer login novamente!')</script>";
+        header("location: ../../assets/php/logoutProcess?logout=true");
+        die();
+    }
+
+    $userData = $result->fetch_assoc();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -134,9 +157,9 @@ if (!isset($_SESSION['login'])) {
                 </div>
                 <div class="profile-information">
                     <ul class="profile-info">
-                        <li class="info">Nome: <span class="info-name">Marcelo Costa</span></li>
-                        <li class="info">Idade: <span class="info-age">20 anos</span></li>
-                        <li class="info">Nacionalidade: <span class="nacionality">Brasil</span></li>
+                        <li class="info">Nome: <span class="info-name"><?php echo("$userData[p_nome] "."$userData[p_sobrenome]") ?></span></li>
+                        <li class="info">Idade: <span class="info-age hidden"><?php echo($userData['data_nasc']) ?></span></li>
+                        <li class="info">Nacionalidade: <span class="info-nacionality hidden"><?php echo($userData['nacionalidade']) ?></span></li>
                     </ul>
                 </div>
             </div>
@@ -235,19 +258,44 @@ if (!isset($_SESSION['login'])) {
 
     <script>
 
-        // Calcular idade
-
-        // const today = new Date();
-        // const birthDate = new Date('2002-08-25');
-        // let age = today.getFullYear() - birthDate.getFullYear();
-        // const m = today.getMonth() - birthDate.getMonth();
+        // IIFE (Immediately Invoked Function Expression) é uma função em JavaScript que é executada assim que definida.
         
-        // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        //     age--;
-        // }
+        (function () {
+            /**
+             * Calcular a idade
+             */
+            const today = new Date();
+            const birthDate = new Date(document.querySelector('.info-age').textContent);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
 
-        // console.log(`Minha idade é ${age}`);
+            document.querySelector('.info-age').textContent = `${age} anos`;
+            document.querySelector('.info-age').classList.remove('hidden');
+        })();
 
+        (function () {
+            /**
+             * Definir a nacionalidade
+             */
+            
+            const url = `https://servicodados.ibge.gov.br/api/v1/paises/${document.querySelector('.info-nacionality').textContent}`;
+
+            fetch(url)
+            .then((response) => response.json())
+
+            .then((json) => document.querySelector('.info-nacionality').textContent = json[0].nome.abreviado)
+
+            .catch((error) => {
+                console.log(error);
+                window.alert('Aconteceu um erro na definição da sua nacionalidade!');
+            })
+
+            .finally(document.querySelector('.info-nacionality').classList.remove('hidden'));
+        })();
     </script>
 </body>
 </html>
