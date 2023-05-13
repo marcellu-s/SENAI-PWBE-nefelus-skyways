@@ -51,8 +51,8 @@ if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['lo
                 <div class="hidden lg:flex lg:gap-x-12">
                     <a href="../../index.php" class="text-sm font-semibold leading-6 text-white">Início</a>
                     <a href="../../pages/reservar_passagem/reservar_passagem.php" class="text-sm font-semibold leading-6 text-white">Reservar passagem</a>
-                    <a href="../../pages/ofertas.html" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
-                    <a href="../../pages/contato.html" class="text-sm font-semibold leading-6 text-white">Contato</a>
+                    <a href="../../pages/ofertas.php" class="text-sm font-semibold leading-6 text-white">Ofertas</a>
+                    <a href="../../pages/contato.php" class="text-sm font-semibold leading-6 text-white">Contato</a>
                     <a href="./main.php" class="text-sm font-semibold leading-6 text-white in-page">Área de trabalho</a>
                 </div>
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -91,9 +91,9 @@ if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['lo
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Início</a>
                                 <a href="../../pages/reservar_passagem/reservar_passagem.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Reservar passagem</a>
-                                <a href="../../pages/ofertas.html"
+                                <a href="../../pages/ofertas.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Ofertas</a>
-                                <a href="../../pages/contato.html"
+                                <a href="../../pages/contato.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white">Contato</a>
                                 <a href="./main.php"
                                     class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-white in-page">Área de trabalho</a>
