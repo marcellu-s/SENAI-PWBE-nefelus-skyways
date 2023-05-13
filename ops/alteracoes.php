@@ -1,7 +1,7 @@
 <?php
 
-session_start();
 include_once "./db.php";
+session_start();
 
 $objeto = $_POST['objeto'];
 $op = $_POST['op'];
@@ -15,8 +15,6 @@ if ($objeto == 'aviao') {
         $query_verif = mysqli_query($conn, "SELECT * FROM aviao WHERE matricula = '$matricula'");
 
         if (mysqli_num_rows($query_verif) > 0) {
-            $_SESSION['callback'] = "<script>window.alert('Matrícula já existente!')</script>";
-            header("Location: ../admin/pages/add_aviao.php");
             die("Matrícula já existente.");
         }
 
@@ -30,9 +28,6 @@ if ($objeto == 'aviao') {
 
         $result_query = mysqli_query($conn, $query_aviao);
 
-        $_SESSION['callback'] = "<script>window.alert('Avião adicionado com sucesso!')</script>";
-
-        header("Location: ../admin/pages/add_aviao.php");
     }
 }
 
@@ -77,7 +72,7 @@ if ($objeto == 'voo') {
         $dados_aviao = mysqli_fetch_array($dados_aviao);
 
         // VAI VERIFICAR SE O AVIAO PODE ESTÁ DISPONIVEL PARA VOO NO DADO AEROPORTO
-        $query_verificadora = mysqli_query($conn,"SELECT destino FROM voo ORDER BY data_chegada DESC LIMIT 1");
+        $query_verificadora = mysqli_query($conn,"SELECT destino FROM voo WHERE aviao = $aviao ORDER BY data_chegada DESC LIMIT 1");
         $verif = mysqli_fetch_assoc($query_verificadora);
 
         //   --   //   --   //   --   //   --   //   --   //   --   //   --   //   --   //
@@ -140,7 +135,7 @@ if ($objeto == 'voo') {
                 // echo $coord_origem['lat']. " <-> " .$coord_origem['lon']. '<br>';
                 // echo $coord_destino['lat']. " <-> " .$coord_destino['lon']. '<br>';
                 $distancia_total = distancia($coord_origem['lat'], $coord_origem['lon'], $coord_destino['lat'], $coord_destino['lon']);
-                $distancia_total = round($distancia, 2);
+                $distancia_total = round($distancia_total, 2);
                 // echo $distancia;
 
             } else {
@@ -203,7 +198,7 @@ if ($objeto == 'voo') {
                 } else {
                     $query_conexoes .= $locais_conexao[$i].", ".$destino.", ". $distancia[$i + 1].")";
                 }
-                // echo $query_conexoes;
+                echo $query_conexoes;
                 $result_conexoes = mysqli_query($conn, $query_conexoes);
 
                 $query_conexoes = "";
@@ -212,11 +207,8 @@ if ($objeto == 'voo') {
             $result_voo = mysqli_query($conn, $query_voo);
 
         } else {
-            echo '<script>window.alert("Inválido pois destino diferente de origem do voo proposto")</script>';
-            header("Location: ../admin/pages/add_voo.php");
+            echo '<br>Inválido pois destino diferente de origem do voo proposto';
         }
-
-        header("Location: ../admin/pages/add_voo.php");
     }
 }
 
@@ -234,24 +226,24 @@ if ($objeto == 'aeroporto') {
         $longitude = $_POST['longitude'];
         
         $query_verif = mysqli_query($conn, "SELECT * FROM aeroporto WHERE sigla = '$sigla'");
-
+        echo mysqli_num_rows($query_verif);
         if (mysqli_num_rows($query_verif)) {
-            $_SESSION['callback'] = "<script>window.alert('Aeroporto não registrado. Sigla igual a alguma existente. $sigla')</script>";
-            header("Location: ../admin/pages/add_aeroporto.php");
+            $_SESSION['callback'] = "Aeroporto não registrado. Sigla igual a alguma existente. $sigla";
+            header("Location: ./add_aeroporto.php");
             die();
         }
 
         $query_verif = mysqli_query($conn, "SELECT * FROM aeroporto WHERE fk_cidade = $cidade AND nome = '$nome'");
         if (mysqli_num_rows($query_verif)) {
-            $_SESSION['callback'] = "<script>window.alert('Aeroporto não registrado. Nome de aeroporto igual numa mesma cidade.')</script>";
-            header("Location: ../admin/pages/add_aeroporto.php");
+            $_SESSION['callback'] = 'Aeroporto não registrado. Nome de aeroporto igual numa mesma cidade.';
+            header("Location: ./add_aeroporto.php");
             die();
         }
 
         $query_verif = mysqli_query($conn, "SELECT * FROM aeroporto WHERE $latitude = $latitude AND longitude = $longitude");
         if (mysqli_num_rows($query_verif)) {
-            $_SESSION['callback'] = "<script>window.alert('Aeroporto não registrado. Latitude e longitude iguais a de outro aeroporto existente.')</script>";
-            header("Location: ../admin/pages/add_aeroporto.php");
+            $_SESSION['callback'] = 'Aeroporto não registrado. Latitude e longitude iguais a de outro aeroporto existente.';
+            header("Location: ./add_aeroporto.php");
             die();
         }
         
@@ -260,8 +252,8 @@ if ($objeto == 'aeroporto') {
 
         $result_query = mysqli_query($conn, $query_aeroporto);
 
-        $_SESSION['callback'] = "<script>window.alert('Aeroporto registrado com sucesso.')</script>";
-        header("Location: ../admin/pages/add_aeroporto.php");
+        $_SESSION['callback'] = 'Aeroporto registrado com sucesso.';
+        header("Location: ./add_aeroporto.php");
     }
 }
 
@@ -278,11 +270,11 @@ if ($objeto == 'cidade') {
         if ($query_verif['qnt'] == 0) {
             $query_cidade = mysqli_query($conn, "INSERT INTO cidade VALUES (default, $estado, '$nome_cidade')");
 
-            $_SESSION['callback'] = "<script>window.alert('Cidade adicionada com sucesso!')</script>";
-            header("Location: ../admin/pages/add_cidade.php");
+            $_SESSION['callback'] = "Cidade adicionada com sucesso.";
+            header("Location: ./add_cidade.php");
         } else {
-            $_SESSION['callback'] = "<script>window.alert('Cidade já existente!')</script>.";
-            header("Location: ../admin/pages/add_cidade.php");
+            $_SESSION['callback'] = "Não foi possível adicionar a cidade(Já existente).";
+            header("Location: ./add_cidade.php");
         }
     }
 
