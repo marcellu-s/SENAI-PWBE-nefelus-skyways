@@ -26,7 +26,7 @@ fetch(url).then((response) => response.json()).then((json) => {
     json.forEach((pais) => {
 
         let nome = pais.nome.abreviado.toLocaleLowerCase();
-        let sigla = pais.id['ISO-3166-1-ALPHA-3'];
+        let sigla = pais.id['ISO-3166-1-ALPHA-2'];
 
         if (nome != prev && sigla != prevSigla) {
 
