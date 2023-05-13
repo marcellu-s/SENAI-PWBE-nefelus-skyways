@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+header {
+  background-color: #333;
+}
+
+header .back-page {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.back-page a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.back-page a:hover {
+  color: #999;
+}
+
+.search-area {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.search-area form {
+  border: 1px solid #333;
+  padding: 1rem;
+}
+
+form .input-control {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form .input-control:first-child {
+  margin-bottom: 1rem;
+}
+
+.display-area {
+  margin-top: 3rem;
+}
+
+.messages-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.message {
+  border: 1px solid #d2d2d2;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.message span {
+  margin-bottom: 1rem;
+}
+
+.message textarea {
+  padding: 0.5rem;
+  outline: none;
+}
