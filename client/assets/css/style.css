@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+header {
+    background-color: #333;
+    margin-bottom: 3rem;
+}
+
+header a:hover {
+    color: #999;
+}
+
+header a.in-page {
+    color: #999;
+    pointer-events: none;
+}
+
+.bg-mobile-menu {
+    background-color: #333;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #b1b1b1;
+}
+
+@media screen and (max-width: 598px) {
+    .profile-header {
+        justify-content: center;
+        gap: 3rem;
+        padding-bottom: 1rem;
+    }
+}
+
+.left {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.profile-header .profile-img img {
+    max-width: 150px;
+}
+
+.profile-information .profile-info li:nth-child(2) {
+    margin: 0.75rem 0;
+}
+
+.profile-information .profile-info li {
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+.profile-information .profile-info span {
+    font-weight: 400;
+}
+
+.options .option button {
+    width: 100%;
+    outline: none;
+    border: 1px solid #333;
+    padding: 0.25rem .5rem;
+    text-align: center;
+    border-radius: 16px;
+
+    transition: background-color 0.3s;
+}
+
+.options .option:nth-child(2) {
+    margin: 0.75rem 0;
+}
+
+.options .option button:hover {
+    color: #fff;
+    background-color: #333;
+}
+
+.request-option-area {
+    margin-top: 3rem;
+}
