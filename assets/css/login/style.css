@@ -105,3 +105,20 @@ main {
     background-color: #fff;
     color: #333;
 }
+
+.no-account {
+    margin-top: 2rem;
+    text-align: center;
+    color: #fff;
+    font-weight: 300;
+}
+
+.no-account a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.no-account a:hover {
+    text-decoration: underline;
+}
