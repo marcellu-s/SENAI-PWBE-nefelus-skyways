@@ -7,6 +7,11 @@ if (!isset($_SESSION['login'])) {
     header("location: ../../pages/login.php");
 }
 
+if (isset($_SESSION['callback'])) {
+    echo($_SESSION['callback']);
+    unset($_SESSION['callback']);
+}
+
 if (isset($_SESSION['loginID'])) {
 
     include_once "../../ops/db.php";
@@ -165,96 +170,19 @@ if (isset($_SESSION['loginID'])) {
             </div>
             <div class="right">
                 <ul class="options">
-                    <li class="option"><button>Editar perfil</button></li>
-                    <li class="option"><button>Ver viagens feitas por mim</button></li>
-                    <li class="option"><button>Passagens pendentes</button></li>
+                    <li class="option"><button class="edit-profile">Editar perfil</button></li>
+                    <li class="option"><button class="show-travels">Ver viagens feitas por mim</button></li>
+                    <li class="option"><button class="passagens-pendentes">Passagens pendentes</button></li>
                 </ul>
             </div>
         </section>
 
         <section class="request-option-area">
-            <div class="request-edit-profile">
-                <form action="">
-                    <div class="left-profile">
-                        <div class="input-control">
-                            <label for="first-name">NOME</label>
-                            <input type="text" name="first-name" id="first-name">
-                        </div>
-                        <div class="input-control">
-                            <label for="last-name">SOBRENOME</label>
-                            <input type="text" name="last-name" id="last-name">
-                        </div>
-                        <div class="input-control">
-                            <label>DATA DE NASCIMENTO</label>
-                            <input type="date" value="25/08/2002" class="no-edit"  readonly>
-                        </div>
-                        <div class="input-control">
-                            <label>GÊNERO</label>
-                            <select name="gender" id="gender">
-                                <option value="h">Homem</option>
-                                <option value="m">Mulher</option>
-                            </select>
-                        </div>
-                        <div class="input-control">
-                            <label for="nacionality">NACIONALIDADE</label>
-                            <select name="nacionality" id="nacionality">
-                                <option value="BRA">BRASIL</option>
-                                <option value="EUA">ESTADOS UNIDOS</option>
-                            </select>
-                        </div>
-                        <div class="input-control">
-                            <label for="telephone">TELEFONE-CELULAR</label>
-                            <input type="tel" name="telephone" id="telephone">
-                        </div>
-                    </div>
-                    <div class="middle-profile">
-                        <div class="input-control">
-                            <label for="cep">CEP</label>
-                            <input type="text" name="cep" id="cep">
-                        </div>
-                        <div class="input-control">
-                            <label for="endereco">ENDERECO</label>
-                            <input type="text" name="endereco" id="endereco" readonly>
-                        </div>
-                        <div class="input-control">
-                            <label for="bairro">BAIRRO</label>
-                            <input type="text" name="bairro" id="bairro" readonly>
-                        </div>
-                        <div class="input-control">
-                            <label for="cidade">CIDADE</label>
-                            <input type="text" name="cidade" id="cidade" readonly>
-                        </div>
-                        <div class="input-control">
-                            <label for="uf">UF</label>
-                            <input type="text" name="uf" id="uf" readonly>
-                        </div>
-                    </div>
-                    <div class="right-profile">
-                        <div class="input-control">
-                            <label for="cpf">CPF</label>
-                            <input type="text" name="cpf" id="cpf" class="no-edit" readonly>
-                        </div>
-                        <div class="input-control">
-                            <label for="passport">PASSAPORTE</label>
-                            <input type="text" name="passport" id="passport" class="no-edit"  readonly>
-                        </div>
-                        <div class="input-control">
-                            <label for="email">E-MAIL</label>
-                            <input type="email" name="email" id="email">
-                        </div>
-                        <div class="input-control">
-                            <label for="old-password">SENHA ANTIGA</label>
-                            <input type="password" name="old-password" id="old-password">
-                        </div>
-                        <div class="input-control">
-                            <label for="new-password">NOVA SENHA</label>
-                            <input type="password" name="new-password" id="new-password">
-                        </div>
-                    </div>
-                </form>
-            </div>
+            
         </section>
     </main>
+
+    <script src="../assets/js/choiceOptionView.js"></script>
 
     <script>
 
