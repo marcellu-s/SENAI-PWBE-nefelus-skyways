@@ -1,3 +1,37 @@
+// API viaCEP
+
+function requestViaCEP() {
+
+    document.querySelector('.input-control #cep').addEventListener('change', function() {
+
+        let cep = this.value.replace(/[^0-9]/g, '');
+
+        if (cep == '' || cep.length < 8) {
+
+            window.alert('CEP inválido!');
+            return;
+        }
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => response.json())
+
+        .then((json) => {
+
+            document.querySelector('.input-control #cep').value = cep;
+            document.querySelector('.input-control #endereco').value = json.logradouro;
+            document.querySelector('.input-control #bairro').value = json.bairro;
+            document.querySelector('.input-control #cidade').value = json.localidade;
+            document.querySelector('.input-control #uf').value = json.uf;
+        })
+
+        .catch((error) => {
+            window.alert('ERRO na requisição da API! Tente novamente!');
+            console.log(error);
+        });
+
+    });
+}
+
 // Request de paises para o SELECT de nacionalidade
 
 function requestCountry() {
@@ -90,12 +124,53 @@ document.querySelector('.edit-profile').onclick = () => {
     .then((response) => response.json())
 
     .then((json) => {
-        document.querySelector('.request-option-area').innerHTML = json
 
-        requestCountry();
+        if (json != '') {
 
-        validateEditProfileForm();
+            document.querySelector('.request-option-area').innerHTML = json
+
+            requestCountry();
+
+            validateEditProfileForm();
+
+            requestViaCEP();
+        }
     })
 
-    .catch((error) => console.log(error));
+    .catch((error) => {
+        console.log(error);
+        window.alert('Aconteceu um erro! Recarregue a página e tente novamente');
+    });
 };
+
+document.querySelector('.show-travels').onclick = () => {
+
+    fetch('../assets/php/matchOptionView.php?option=show-travels')
+    .then((response) => response.json())
+
+    .then((json) => {
+
+        document.querySelector('.request-option-area').innerHTML = json
+    })
+
+    .catch((error) => {
+        console.log(error);
+        window.alert('Aconteceu um erro! Recarregue a página e tente novamente');
+    })
+}
+
+document.querySelector('.passagens').onclick = () => {
+
+    fetch('../assets/php/matchOptionView.php?option=passagens')
+    .then((response) => response.json())
+
+    .then((json) => {
+
+        document.querySelector('.request-option-area').innerHTML = json
+    })
+
+    .catch((error) => {
+        console.log(error);
+        window.alert('Aconteceu um erro! Recarregue a página e tente novamente');
+    });
+}

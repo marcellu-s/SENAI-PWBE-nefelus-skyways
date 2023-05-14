@@ -10,8 +10,10 @@ $id = $_SESSION['loginID'];
 
 $option = $_GET['option'];
 
-switch ($option) {
+date_default_timezone_set('America/Sao_Paulo');
 
+switch ($option) {
+    // Editar perfil
     case 'edit-profile':
 
         $query = "SELECT * FROM cadastro
@@ -21,9 +23,9 @@ switch ($option) {
 
         $result = $conn->query($query);
 
-        if ($result->num_rows != 0) {
+        if ($result->num_rows != 1) {
 
-            // ERRO
+            die();
         }
 
         $userData = $result->fetch_assoc();
@@ -118,12 +120,320 @@ switch ($option) {
         
         break;
     
+    case 'show-travels':
+
+        $today = date('Y-m-d');
+
+        $query = "SELECT origem, destino, data_ida, data_chegada, preco_final FROM voo
+        INNER JOIN passagem
+        ON passagem.fk_voo = voo.id_voo
+        INNER JOIN passageiro
+        ON passageiro.id_passageiro = passagem.fk_passageiro
+        INNER JOIN cadastro
+        ON cadastro.id_cadastro = passageiro.fk_cadastro
+        WHERE cadastro.id_cadastro = $id 
+        AND 
+        passagem.status_passagem = 'paga' 
+        AND 
+        DATE(data_chegada) < DATE('$today')
+        ORDER BY DATE(data_chegada) DESC";
+
+        $result = $conn->query($query);
+
+        if (mysqli_error($conn)) {
+
+            die();
+        }
+
+        $theadTr = "
+            <tr>
+                <th>Origem</th>
+                <th>Destino</th>
+                <th>Data de ida</th>
+                <th>Data de chegada</th>
+                <th>Preço</th>
+            </tr>";
+
+        $tbodyTr = "";
+
+        while ($assoc = $result->fetch_assoc()) {
+
+            // ----------------------------------------------- //
+            // ----------------------------------------------- //
+            
+            // Query para buscar o aeroporto referente a origem e destino
+
+            $queryAeroportoOrigem = $conn->query("SELECT nome_cidade FROM aeroporto
+            INNER JOIN voo 
+            ON '$assoc[origem]' = aeroporto.id_aeroporto
+            INNER JOIN cidade
+            ON cidade.id_cidade = aeroporto.fk_cidade");
+
+            $AeroportoOrigem = $queryAeroportoOrigem->fetch_array()[0];
+
+            $queryAeroportoDestino = $conn->query("SELECT nome_cidade FROM aeroporto
+            INNER JOIN voo 
+            ON '$assoc[destino]' = aeroporto.id_aeroporto
+            INNER JOIN cidade
+            ON cidade.id_cidade = aeroporto.fk_cidade");
+
+            $AeroportoDestino = $queryAeroportoDestino->fetch_array()[0];
+
+            // ----------------------------------------------- //
+            // ----------------------------------------------- //
+
+            // Trocando o formato da data de AAAA-MM-DD para DD-MM-AAAA
+
+            $dataIdaReplaceFormat = new DateTime($assoc['data_ida']);
+            $dataIdaNewFormat = $dataIdaReplaceFormat->format('d-m-Y H:i:s');
+
+            $dataChegadaReplaceFormat = new DateTime(($assoc['data_chegada']));
+            $dataChegadaNewFormat = $dataChegadaReplaceFormat->format('d-m-Y H:i:s');
+
+            // ----------------------------------------------- //
+            // ----------------------------------------------- //
+
+            // Inserindo os devidos dados para retorno
+
+            $tbodyTr = $tbodyTr."
+                <tr>
+                    <td>$AeroportoOrigem</td>
+                    <td>$AeroportoDestino</td>
+                    <td>$dataIdaNewFormat</td>
+                    <td>$dataChegadaNewFormat</td>
+                    <td>R$ $assoc[preco_final]</td>
+                </tr>";
+        }
+
+        $template = "
+        <div class='request-shows-travels'>
+            <table>
+                <thead>
+                    ".$theadTr."
+                </thead>
+                <tbody>
+                    ".$tbodyTr."
+                </tbody>
+            </table>
+        </div>
+        ";
+
+        if ($tbodyTr == '') {
+
+            $template = "Sem registros de viagens";
+        }
+
+        break;
+
+    case 'passagens':
+
+        $today = date('Y-m-d');
+
+        $query = "SELECT origem, destino, data_ida, data_chegada, preco_final, status_passagem, id_passagem FROM passagem
+        INNER JOIN voo
+        ON voo.id_voo = passagem.fk_voo
+        INNER JOIN passageiro
+        ON passageiro.id_passageiro = passagem.fk_passageiro
+        INNER JOIN cadastro
+        ON cadastro.id_cadastro = passageiro.fk_cadastro
+        WHERE cadastro.id_cadastro = $id
+        ORDER BY data_ida";
+
+        $result = $conn->query($query);
+
+        if (mysqli_error($conn)) {
+
+            die();
+        }
+
+
+        $theadTr = "
+        <tr>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Data de ida</th>
+            <th>Data de chegada</th>
+            <th>Preço</th>
+            <th>Status</th>
+            <th>Operações</th>
+        </tr>";
+
+        $tbodyTr = "";
+
+        while ($assoc = $result->fetch_assoc()) {
+
+            $select = "---";
+
+            // ----------------------------------------------- //
+            // ----------------------------------------------- //
+
+            // Aqui começa uma verificação para determinar se a passagem pode ser paga ou não
+            // Dependendo da data de ida entre outras coisas
+
+            if ($assoc['status_passagem'] == 'paga') {
+
+                $resultStatusPassagem = $conn->query("SELECT data_ida FROM voo
+                INNER JOIN passagem
+                ON passagem.fk_voo = voo.id_voo
+                WHERE passagem.id_passagem = $assoc[id_passagem]
+                AND DATE(data_ida) > DATE('$today')");
+
+                if ($resultStatusPassagem->num_rows > 0) {
+
+                    $resultStatus = $resultStatusPassagem->fetch_array()[0];
+
+                    $dataIda = date($resultStatus);
+
+                    $today = date("Y-m-d H:i:s");
+
+                    $dataInicio = new DateTime($today);
+                    $dataFim = new DateTime($dataIda);
+
+                    $dateInterval = $dataInicio->diff($dataFim);
+
+                    if (($dateInterval->days) >= 1) {
+                        
+                        // pode cancelar
+
+                        $select = "
+                        <select>
+                            <option selected>...</option>
+                            <option>Cancelar</option>
+                        </select>
+                        ";
+
+                    } else {
+
+                        // não pode cancela
+
+                        $select = "Tempo de cancelamento expirado";
+
+                    }
+                } else {
+                    $select = "Realizada";
+                }
+
+            } else if ($assoc['status_passagem'] == 'não paga') {
+
+                $resultStatusPassagem = $conn->query("SELECT data_ida FROM voo
+                INNER JOIN passagem
+                ON passagem.fk_voo = voo.id_voo
+                WHERE passagem.id_passagem = $assoc[id_passagem]
+                AND DATE(data_ida) > DATE('$today')");
+
+                if ($resultStatusPassagem->num_rows > 0) {
+
+                    $resultStatus = $resultStatusPassagem->fetch_array()[0];
+
+                    $dataIda = date($resultStatus);
+
+                    $today = date("Y-m-d H:i:s");
+
+                    $dataInicio = new DateTime($dataIda);
+                    $dataFim = new DateTime($today);
+
+                    $dateInterval = $dataInicio->diff($dataFim);
+
+                    if (($dateInterval->days) >= 1) {
+                        
+                        // pode cancelar
+
+                        $select = "
+                        <select>
+                            <option selected>Pagar agora</option>
+                            <option>Cancelar</option>
+                        </select>
+                        ";
+
+                    } else {
+
+                        // não pode cancela
+
+                        $select = "Cancelada por falta de pagamento";
+
+                    }
+                } else {
+
+                    $select = "Cancelada por falta de pagamento";
+                }
+
+            } else if ($assoc['status_passagem'] == 'cancelada') {
+
+                $select = "---";
+            }
+
+            // ----------------------------------------------- //
+            // ----------------------------------------------- //
+            
+            // Query para buscar o aeroporto referente a origem e destino
+
+            $queryAeroportoOrigem = $conn->query("SELECT nome_cidade FROM aeroporto
+            INNER JOIN voo 
+            ON '$assoc[origem]' = aeroporto.id_aeroporto
+            INNER JOIN cidade
+            ON cidade.id_cidade = aeroporto.fk_cidade");
+
+            $AeroportoOrigem = $queryAeroportoOrigem->fetch_array()[0];
+
+            $queryAeroportoDestino = $conn->query("SELECT nome_cidade FROM aeroporto
+            INNER JOIN voo 
+            ON '$assoc[destino]' = aeroporto.id_aeroporto
+            INNER JOIN cidade
+            ON cidade.id_cidade = aeroporto.fk_cidade");
+
+            $AeroportoDestino = $queryAeroportoDestino->fetch_array()[0];
+
+            // ----------------------------------------------- //
+            // ----------------------------------------------- //
+
+            // Trocando o formato da data de AAAA-MM-DD para DD-MM-AAAA
+
+            $dataIdaReplaceFormat = new DateTime($assoc['data_ida']);
+            $dataIdaNewFormat = $dataIdaReplaceFormat->format('d-m-Y H:i:s');
+
+            $dataChegadaReplaceFormat = new DateTime(($assoc['data_chegada']));
+            $dataChegadaNewFormat = $dataChegadaReplaceFormat->format('d-m-Y H:i:s');
+
+            // ----------------------------------------------- //
+            // ----------------------------------------------- //
+
+            $tbodyTr = $tbodyTr."
+                <tr>
+                    <td>$AeroportoOrigem</td>
+                    <td>$AeroportoDestino</td>
+                    <td>$dataIdaNewFormat</td>
+                    <td>$dataChegadaNewFormat</td>
+                    <td>R$ $assoc[preco_final]</td>
+                    <td>$assoc[status_passagem]</td>
+                    <td>$select</td>
+                </tr>";
+        }
+
+        $template = "
+        <div class='request-shows-travels'>
+            <table>
+                <thead>
+                    ".$theadTr."
+                </thead>
+                <tbody>
+                    ".$tbodyTr."
+                </tbody>
+            </table>
+        </div>
+        ";
+
+        break;
+    
     default:
         # code...
         break;
 }
 
+if ($template != '') {
 
-echo(json_encode($template));
+    echo(json_encode($template));
+} else {
+    echo('Um erro aconteceu!');
+}
 
 ?>

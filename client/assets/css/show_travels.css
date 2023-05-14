@@ -1,0 +1,22 @@
+
+.request-shows-travels table {
+    width: 100%;
+    text-align: center;
+}
+
+table thead {
+    color: #333;
+}
+
+table tbody {
+    color: #333;
+    font-weight: 400;
+}
+
+table tr {
+    border-bottom: 1px solid #a1a1a1;
+}
+
+table td, table th {
+    padding: 0.5rem 1rem;
+}

@@ -53,6 +53,7 @@ if (isset($_SESSION['loginID'])) {
     <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/edit_profile.css">
+    <link rel="stylesheet" href="../assets/css/show_travels.css">
 </head>
 <body>
     <!-- HEADER -->
@@ -172,15 +173,17 @@ if (isset($_SESSION['loginID'])) {
                 <ul class="options">
                     <li class="option"><button class="edit-profile">Editar perfil</button></li>
                     <li class="option"><button class="show-travels">Ver viagens feitas por mim</button></li>
-                    <li class="option"><button class="passagens-pendentes">Passagens pendentes</button></li>
+                    <li class="option"><button class="passagens">Passagens</button></li>
                 </ul>
             </div>
         </section>
 
         <section class="request-option-area">
-            
+
         </section>
     </main>
+
+    <!-- JavaScript -->
 
     <script src="../assets/js/choiceOptionView.js"></script>
 
@@ -222,8 +225,13 @@ if (isset($_SESSION['loginID'])) {
                 window.alert('Aconteceu um erro na definição da sua nacionalidade!');
             })
 
-            .finally(document.querySelector('.info-nacionality').classList.remove('hidden'));
+            .finally(() => {
+
+                document.querySelector('.info-nacionality').classList.remove('hidden');
+            });
         })();
     </script>
+
+
 </body>
 </html>
