@@ -104,11 +104,11 @@
                 </div>
                 <div class="input-control">
                     <label for="password">SENHA</label>
-                    <input type="password" id="password" name="password" min="8" max="25" placeholder="Mínimo de 8 caracteres" required>
+                    <input type="password" id="password" name="password" minlength="8" maxlength="25" placeholder="Mínimo de 8 caracteres" required>
                 </div>
                 <div class="input-control">
                     <label for="confirm-password">CONFIRMAR SENHA<span class="span-confirm-psw"> => SENHAS DIFERENTES!</span></label>
-                    <input type="password" id="confirm-password" name="confirm-password" min="8" max="25" placeholder="Insira a senha digitada acima" required>
+                    <input type="password" id="confirm-password" name="confirm-password" minlength="8" maxlength="25" placeholder="Insira a senha digitada acima" required>
                     
                 </div>
                 <div class="input-btn">
