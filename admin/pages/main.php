@@ -8,6 +8,12 @@ if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['lo
     header("location: ../../pages/login.php");
 }
 
+include_once "../../ops/db.php";
+
+$result = $conn->query("SELECT p_nome, p_sobrenome FROM pessoa INNER JOIN cadastro ON cadastro.fk_pessoa = pessoa.id_pessoa WHERE id_cadastro = $_SESSION[loginID]");
+$name = $result->fetch_array();
+$name = "$name[0] $name[1]";
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -116,7 +122,7 @@ if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['lo
 
     <main>
         <div class="actual-account-login">
-            <p>Bem vindo, <span>Admin name</span></p>
+            <p>Bem vindo, <span><?php echo($name); ?></span></p>
         </div>
 
         <div class="dashboard">
@@ -152,34 +158,14 @@ if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['lo
             </div>
         </div>
         
-        <div class="response-query-selection hide">
+        <div class="response-query-selection">
             <table>
-                <thead>
-                    <tr>
-                        <!-- <caption><input type="text" placeholder="Buscar" class="input-filter"></caption> -->
-                        <th>---</th>
-                        <th>---</th>
-                        <th>---</th>
-                        <th>---</th>
-                        <th>---</th>
-                        <th>---</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                    </tr>
-                </tbody>
+                <thead></thead>
+                <tbody></tbody>
             </table>
         </div>
         <div class="pagination">
             <div class="links-wrapper">
-                <!-- <a href="#">1</a> -->
             </div>
         </div>
     </main>

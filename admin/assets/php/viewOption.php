@@ -17,7 +17,7 @@ function createTable($optionParam) {
     // Calcular o inicio visualização
     $inicio = ($qnt_result_pg * $pagina) - $qnt_result_pg;
 
-    $array = null;
+    $check = NULL;
 
     switch ($optionParam) {
 
@@ -25,28 +25,36 @@ function createTable($optionParam) {
 
             $query = "SELECT matricula, modelo, carga, velocidade, id_aviao FROM aviao LIMIT $qnt_result_pg OFFSET $inicio";
 
-            $result = mysqli_query($conn, $query);
+            $result = $conn->query($query);
 
-            $array = [
-                [
-                    'Matrícula de registro',
-                    'Modelo',
-                    'Capacidade de carga - kg',
-                    'Velocidade de cruzeiro - km/h',
-                    'Detalhes'
-                ]
-            ];
+            $thead = "<tr>
+                    <th>Matrícula de registro</th>
+                    <th>Modelo</th>
+                    <th>Capacidade de carga - kg</th>
+                    <th>Velocidade de cruzeiro - km/h</th>
+                    <th>Detalhes</th>
+                </tr>";
 
-            while ($row = mysqli_fetch_row($result)) {
+            $tbody = '';
 
-                $id = $row[count($row) - 1];
+            $countItens = 0;
 
-                array_pop($row);
+            while ($assoc = $result->fetch_assoc()) {
 
-                array_push($row, "<a href='./detalhes.php?id=$id&op=aviao' target='_blank'><i class='bi bi-link'></i></a>");
+                $id = $assoc['id_aviao'];
 
-                array_push($array, $row);
+                $countItens++;
+
+                $tbody = $tbody."<tr>
+                    <td>$assoc[matricula]</td>
+                    <td>$assoc[modelo]</td>
+                    <td>$assoc[carga]</td>
+                    <td>$assoc[velocidade]</td>
+                    <td><a href='./detalhes.php?id=$id&op=aviao' target='_blank'><i class='bi bi-link'></i></a></td>
+                </tr>";
             }
+
+            $check = true;
 
             break;
         }
@@ -60,28 +68,36 @@ function createTable($optionParam) {
             ON estado.id_estado = cidade.fk_estado
             LIMIT $qnt_result_pg OFFSET $inicio";
 
-            $result = mysqli_query($conn, $query);
+            $result = $conn->query($query);
 
-            $array = [
-                [
-                    'IATA',
-                    'Aeroporto',
-                    'Cidade',
-                    'Estado',
-                    'Detalhes'
-                ]
-            ];
+            $thead = "<tr>
+                    <th>IATA</th>
+                    <th>Aeroporto</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Detalhes</th>
+                </tr>";
 
-            while ($row = mysqli_fetch_row($result)) {
+            $tbody = '';
 
-                $id = $row[count($row) - 1];
+            $countItens = 0;
 
-                array_pop($row);
+            while ($assoc = $result->fetch_assoc()) {
 
-                array_push($row, "<a href='./detalhes.php?id=$id&op=aeroporto' target='_blank'><i class='bi bi-link'></i></a>");
+                $id = $assoc['id_aeroporto'];
 
-                array_push($array, $row);
+                $countItens++;
+
+                $tbody = $tbody."<tr>
+                    <td>$assoc[sigla]</td>
+                    <td>$assoc[nome]</td>
+                    <td>$assoc[nome_cidade]</td>
+                    <td>$assoc[nome_estado]</td>
+                    <td><a href='./detalhes.php?id=$id&op=aeroporto' target='_blank'><i class='bi bi-link'></i></a></td>
+                </tr>";
             }
+
+            $check = true;
 
             break;
         }
@@ -95,31 +111,43 @@ function createTable($optionParam) {
             WHERE NOT funcionario.fk_cadastro = cadastro.id_cadastro
             LIMIT $qnt_result_pg OFFSET $inicio";
 
-            $result = mysqli_query($conn, $query);
+            $result = $conn->query($query);
 
-            $array = [
-                [
-                    'Nome',
-                    'Sobrenome',
-                    'Data de nascimento',
-                    'Gênero',
-                    'Nacionalidade',
-                    'E-mail',
-                    'Telefone',
-                    'Detalhes'
-                ]
-            ];
+            $thead = "<tr>
+                    <th>Nome</th>
+                    <th>Data de nascimento</th>
+                    <th>Gênero</th>
+                    <th>Nacionalidade</th> 
+                    <th>E-mail</th> 
+                    <th>Telefone</th> 
+                    <th>Detalhes</th>
+                </tr>";
 
-            while ($row = mysqli_fetch_row($result)) {
+            $tbody = '';
 
-                $id = $row[count($row) - 1];
+            $countItens = 0;
 
-                array_pop($row);
+            while ($assoc = $result->fetch_assoc()) {
 
-                array_push($row, "<a href='./detalhes.php?id=$id&op=cadastro' target='_blank'><i class='bi bi-link'></i></a>");
+                $id = $assoc['id_cadastro'];
 
-                array_push($array, $row);
+                $countItens++;
+
+                $name = "$assoc[p_nome] $assoc[p_sobrenome]";
+                $gender = strtolower($assoc['sexo']) == 'h' ? 'Homem' : 'Mulher';
+
+                $tbody = $tbody."<tr>
+                    <td>$name</td>
+                    <td>$assoc[data_nasc]</td>
+                    <td>$gender</td>
+                    <td>$assoc[nacionalidade]</td>
+                    <td>$assoc[email]</td>
+                    <td>$assoc[telefone]</td>
+                    <td><a href='./detalhes.php?id=$id&op=cadastro' target='_blank'><i class='bi bi-link'></i></a></td>
+                </tr>";
             }
+
+            $check = true;
 
             break;
         }
@@ -131,29 +159,39 @@ function createTable($optionParam) {
             ON pessoa.id_pessoa = passageiro.fk_pessoa
             LIMIT $qnt_result_pg OFFSET $inicio";
 
-            $result = mysqli_query($conn, $query);
+            $result = $conn->query($query);
 
-            $array = [
-                [
-                    'Nome',
-                    'Sobrenome',
-                    'Data de nascimento',
-                    'Gênero',
-                    'Nacionalidade',
-                    'Detalhes'
-                ]
-            ];
+            $thead = "<tr>
+                    <th>Nome</th>
+                    <th>Data de nascimento</th>
+                    <th>Gênero</th>
+                    <th>Nacionalidade</th> 
+                    <th>Detalhes</th>
+                </tr>";
 
-            while ($row = mysqli_fetch_row($result)) {
+            $tbody = '';
 
-                $id = $row[count($row) - 1];
+            $countItens = 0;
 
-                array_pop($row);
+            while ($assoc = $result->fetch_assoc()) {
 
-                array_push($row, "<a href='./detalhes.php?id=$id&op=passageiro' target='_blank''><i class='bi bi-link'></i></a>");
+                $id = $assoc['id_passageiro'];
 
-                array_push($array, $row);
+                $countItens++;
+
+                $name = "$assoc[p_nome] $assoc[p_sobrenome]";
+                $gender = strtolower($assoc['sexo']) == 'h' ? 'Homem' : 'Mulher';
+
+                $tbody = $tbody."<tr>
+                    <td>$name</td>
+                    <td>$assoc[data_nasc]</td>
+                    <td>$gender</td>
+                    <td>$assoc[nacionalidade]</td>
+                    <td><a href='./detalhes.php?id=$id&op=passageiro' target='_blank'><i class='bi bi-link'></i></a></td>
+                </tr>";
             }
+
+            $check = true;
 
             break;
         }
@@ -166,40 +204,56 @@ function createTable($optionParam) {
             INNER JOIN funcionario
             WHERE funcionario.fk_cadastro = cadastro.id_cadastro
             LIMIT $qnt_result_pg OFFSET $inicio";
+            
+            $result = $conn->query($query);
 
-            $result = mysqli_query($conn, $query);
+            $thead = "<tr>
+                    <th>Nome</th>
+                    <th>Data de nascimento</th>
+                    <th>Gênero</th>
+                    <th>Nacionalidade</th> 
+                    <th>E-mail</th> 
+                    <th>Telefone</th> 
+                    <th>Função</th> 
+                    <th>Detalhes</th>
+                </tr>";
 
-            $array = [
-                [
-                    'Nome',
-                    'Sobrenome',
-                    'Data de nascimento',
-                    'Gênero',
-                    'Nacionalidade',
-                    'E-mail',
-                    'Telefone',
-                    'Função',
-                    'Detalhes'
-                ]
-            ];
+            $tbody = '';
 
-            while ($row = mysqli_fetch_row($result)) {
+            $countItens = 0;
 
-                $id = $row[count($row) - 1];
+            while ($assoc = $result->fetch_assoc()) {
 
-                array_pop($row);
+                $id = $assoc['id_funcionario'];
 
-                array_push($row, "<a href='./detalhes.php?id=$id&op=funcionario' target='_blank'><i class='bi bi-link'></i></a>");
+                $countItens++;
 
-                array_push($array, $row);
+                $name = "$assoc[p_nome] $assoc[p_sobrenome]";
+                $gender = strtolower($assoc['sexo']) == 'h' ? 'Homem' : 'Mulher';
+                $job = strtolower($assoc['funcao']) == 'admin' ? 'Administrador' : 'Comum';
+
+                $tbody = $tbody."<tr>
+                    <td>$name</td>
+                    <td>$assoc[data_nasc]</td>
+                    <td>$gender</td>
+                    <td>$assoc[nacionalidade]</td>
+                    <td>$assoc[email]</td>
+                    <td>$assoc[telefone]</td>
+                    <td>$job</td>
+                    <td><a href='./detalhes.php?id=$id&op=funcionario' target='_blank'><i class='bi bi-link'></i></a></td>
+                </tr>";
             }
+
+            $check = true;
+
+            break;
         }
     }
 
-    if ($array != NULL) {
+    if ($check === true) {
 
         // Quantidade de pagina
-        $quantidade_pg = ceil(count($array[0]) / $qnt_result_pg);
+        $quantidade_pg = ceil($countItens / $qnt_result_pg);
 
         // Limitar os link antes depois
         $max_links = 1;
@@ -222,8 +276,10 @@ function createTable($optionParam) {
         $linkPaginas = $linkPaginas . "<a class='$quantidade_pg $optionParam'>></a>";
 
         $data = [
-            json_encode($array),
-            json_encode($linkPaginas)
+            $thead,
+            $tbody,
+            $countItens,
+            $linkPaginas
         ];
 
         return json_encode($data);
