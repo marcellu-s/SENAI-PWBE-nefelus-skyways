@@ -1,3 +1,48 @@
+// Função de operações de cancelamento e pagar agora - PASSAGENS
+function payment() {
+
+    let selectPayment = document.querySelector('#payment');
+
+    if (selectPayment == undefined) {
+
+        return;
+    }
+
+    // function payNow() {
+
+    //     fetch('../assets/php/paymentOptions.php?option=pay-now')
+    //     .then((response) => console.log(response))
+    //     .catch((error) => console.log(error));
+    // }
+
+    selectPayment.addEventListener('change', function() {
+
+        if (this.value == 'cancel') {
+
+            let th = document.createElement('th');  
+            th.textContent = 'Método de pagamento';
+
+            let td = document.createElement('td');
+            td.innerHTML = `
+            <select id='method-payment' name='method-payment'>
+                <option value='' selected disabled>Selecione a forma de pagamento</option>
+                <option value='c'>Cartão de crédito</option>
+                <option value='d'>Cartão de débito</option>
+                <option value='p'>PIX</option>
+            </select>`;
+
+            document.querySelector('thead tr').appendChild(th);
+            document.querySelector('t')
+
+            console.log('para cancelar');
+
+        } else if (this.value == 'pay-now') {
+
+            console.log('pagar agora');
+        }
+    })
+}
+
 // API viaCEP
 
 function requestViaCEP() {
@@ -166,7 +211,9 @@ document.querySelector('.passagens').onclick = () => {
 
     .then((json) => {
 
-        document.querySelector('.request-option-area').innerHTML = json
+        document.querySelector('.request-option-area').innerHTML = json;
+
+        // payment();
     })
 
     .catch((error) => {

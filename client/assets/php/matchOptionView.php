@@ -258,6 +258,7 @@ switch ($option) {
             <th>Operações</th>
         </tr>";
 
+
         $tbodyTr = "";
 
         while ($assoc = $result->fetch_assoc()) {
@@ -296,9 +297,9 @@ switch ($option) {
                         // pode cancelar
 
                         $select = "
-                        <select>
-                            <option selected>...</option>
-                            <option>Cancelar</option>
+                        <select name='payment' id='payment'>
+                            <option value='' selected>...</option>
+                            <option value='$assoc[id_passagem]'>Cancelar</option>
                         </select>
                         ";
 
@@ -338,10 +339,22 @@ switch ($option) {
                         
                         // pode cancelar
 
+                        $theadTr = "
+                        <tr>
+                            <th>Origem</th>
+                            <th>Destino</th>
+                            <th>Data de ida</th>
+                            <th>Data de chegada</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Operações</th>
+                            <th>Método de pagamento</th>
+                        </tr>";
+
                         $select = "
-                        <select>
-                            <option selected>Pagar agora</option>
-                            <option>Cancelar</option>
+                        <select name='payment' id='payment'>
+                            <option value='$assoc[id_passagem]' selected>Pagar agora</option>
+                            <option value='$assoc[id_passagem]'>Cancelar</option>
                         </select>
                         ";
 
