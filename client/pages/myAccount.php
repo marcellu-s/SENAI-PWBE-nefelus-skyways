@@ -186,6 +186,7 @@ if (isset($_SESSION['loginID'])) {
     <!-- JavaScript -->
 
     <script src="../assets/js/choiceOptionView.js"></script>
+    <script src="../../assets/js/mobileMenu.js"></script>
 
     <script>
 
