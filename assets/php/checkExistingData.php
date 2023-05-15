@@ -12,9 +12,9 @@ $queryPassport = "SELECT COUNT(passaporte) FROM pessoa WHERE passaporte = '$pass
 
 if ($passport) {
 
-    $result = mysqli_query($conn, $queryPassport);
+    $result = $conn->query($queryPassport);
 
-    if (mysqli_fetch_array($result)[0] > 0) {
+    if ($result->num_rows > 0) {
 
         echo("O passaporte informado, já está em uso!");
         die();
@@ -23,9 +23,9 @@ if ($passport) {
 
 if ($cpf) {
 
-    $result = mysqli_query($conn, $queryCpf);
+    $result = $conn->query($queryCpf);
 
-    if (mysqli_fetch_array($result)[0] > 0) {
+    if ($result->num_rows > 0) {
 
         echo("O CPF informado, já está em uso!");
         die();
@@ -34,9 +34,9 @@ if ($cpf) {
 
 if ($email) {
 
-    $result = mysqli_query($conn, $queryEmail);
+    $result = $conn->query($queryEmail);
 
-    if (mysqli_fetch_array($result)[0] > 0) {
+    if ($result->num_rows > 0) {
 
         echo("O email informado, já está em uso!");
         die();
