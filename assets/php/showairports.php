@@ -1,7 +1,6 @@
 <?php
 
-// Conexão ao banco de dados por PDO
-include_once "../../ops/db.php";
+include "../../ops/db.php";
 
 if (isset($_POST['q'])) {
     // Caso seja passado um parâmetro
@@ -21,14 +20,14 @@ $resultData = $result->fetch_all();
 
 $rowCount = $result->num_rows;
 
-// Determinando o dado e retornando o mesmo
+// Determinado o dado e retornando o mesmo
 $data = null;
 
-if ($result->num_rows > 0) {
+if ($rowCount > 0) {
 
-    // Iterando sobre o resultado
-    while($row = $result->fetch_assoc()) {
-        $data = "<span>" . $row['nome'] . "</span>";
+    foreach($result as $row) {
+        $data = "<span>$row[nome]</span>";
+
         echo($data);
     }
 
