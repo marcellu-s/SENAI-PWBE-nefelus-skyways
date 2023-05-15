@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Maio-2023 às 03:37
+-- Tempo de geração: 15-Maio-2023 às 04:18
 -- Versão do servidor: 8.0.32
 -- versão do PHP: 8.0.25
 
@@ -63,7 +63,7 @@ CREATE TABLE `assento` (
 --
 
 INSERT INTO `assento` (`id_assento`, `preco_economico`, `preco_premium`) VALUES
-(1, '40.00', '120.00');
+(1, '50.00', '102.00');
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,8 @@ CREATE TABLE `cadastro` (
 
 INSERT INTO `cadastro` (`id_cadastro`, `email`, `telefone`, `senha`, `fk_pessoa`) VALUES
 (1, 'marcelo@host.com', '11955555555', '345120426285ff8b1d43653a4d078170b4761f75', 1),
-(2, 'manoel@host.com', '11922222222', 'bfe54caa6d483cc3887dce9d1b8eb91408f1ea7a', 2);
+(2, 'manoel@host.com', '11922222222', 'bfe54caa6d483cc3887dce9d1b8eb91408f1ea7a', 2),
+(3, 'anaclara@host.com', '11966666666', 'f7c3bc1d808e04732adf679965ccc34ca7ae3441', 3);
 
 -- --------------------------------------------------------
 
@@ -253,7 +254,8 @@ CREATE TABLE `funcionario` (
 --
 
 INSERT INTO `funcionario` (`id_funcionario`, `funcao`, `fk_pessoa`, `fk_cadastro`) VALUES
-(1, 'admin', 1, 1);
+(1, 'admin', 1, 1),
+(2, 'comum', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -282,6 +284,13 @@ CREATE TABLE `passageiro` (
   `fk_cadastro` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Extraindo dados da tabela `passageiro`
+--
+
+INSERT INTO `passageiro` (`id_passageiro`, `fk_pessoa`, `fk_cadastro`) VALUES
+(1, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -297,6 +306,13 @@ CREATE TABLE `passagem` (
   `fk_assento` int NOT NULL,
   `fk_pagamento` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `passagem`
+--
+
+INSERT INTO `passagem` (`id_passagem`, `preco_final`, `status_passagem`, `fk_voo`, `fk_passageiro`, `fk_assento`, `fk_pagamento`) VALUES
+(1, '1200.00', 'paga', 1, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -322,7 +338,8 @@ CREATE TABLE `pessoa` (
 
 INSERT INTO `pessoa` (`id_pessoa`, `p_nome`, `p_sobrenome`, `endereco`, `data_nasc`, `sexo`, `nacionalidade`, `cpf`, `passaporte`) VALUES
 (1, 'Marcelo', 'Costa', 'Rua Juscelino Pinheiro de Sá;Jardim do Édem;Itapecerica da Serra;SP;147;06865030', '1987-01-12', 'h', 'FI', '48200879089', 'AB123456'),
-(2, 'Manoel', 'Gomes', 'Avenida João Pessoa; Centro; Balsas; MA; 147; 65800970', '1969-12-02', 'h', 'BR', '26337353048', 'CA123456');
+(2, 'Manoel', 'Gomes', 'Avenida João Pessoa;Centro;Balsas;MA; 147;65800970', '1969-12-02', 'h', 'BR', '26337353048', 'CA123456'),
+(3, 'Ana Clara', 'Almeida', 'Rua 3-A;Jardim Vitória;Cuiabá;MT;547;78055747', '1999-02-12', 'm', NULL, '83684043044', NULL);
 
 -- --------------------------------------------------------
 
@@ -348,7 +365,7 @@ CREATE TABLE `voo` (
 --
 
 INSERT INTO `voo` (`id_voo`, `origem`, `destino`, `duracao`, `distancia`, `data_ida`, `data_chegada`, `aviao`, `fk_assento`, `escala`) VALUES
-(1, 1, 2, '00:00:00', '0.00', '2023-05-11 08:34:00', '2023-05-11 08:34:00', 2, 1, 0);
+(1, 2, 4, '02:05:05', '1000.00', '2023-05-08 18:03:09', '2023-05-12 14:03:10', 1, 1, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -490,7 +507,7 @@ ALTER TABLE `aviao`
 -- AUTO_INCREMENT de tabela `cadastro`
 --
 ALTER TABLE `cadastro`
-  MODIFY `id_cadastro` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cadastro` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `cidade`
@@ -526,7 +543,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de tabela `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `id_funcionario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_funcionario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `pagamento`
@@ -538,19 +555,19 @@ ALTER TABLE `pagamento`
 -- AUTO_INCREMENT de tabela `passageiro`
 --
 ALTER TABLE `passageiro`
-  MODIFY `id_passageiro` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_passageiro` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `passagem`
 --
 ALTER TABLE `passagem`
-  MODIFY `id_passagem` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_passagem` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `id_pessoa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pessoa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `voo`
