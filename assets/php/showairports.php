@@ -13,12 +13,13 @@ if (isset($_POST['q'])) {
     $query = "SELECT * FROM aeroporto ORDER BY nome";
 }
 
-// Executando a query
-$prepare = $conn->prepare($query);
-$prepare->execute();
+// // Executando a query
+$result = $conn->query($query);
 
-// Obtendo o resultado como um objeto mysqli_result
-$result = $prepare->get_result();
+// // Resultado a partir da query
+$resultData = $result->fetch_all();
+
+$rowCount = $result->num_rows;
 
 // Determinando o dado e retornando o mesmo
 $data = null;
