@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Maio-2023 às 04:18
+-- Tempo de geração: 15-Maio-2023 às 16:54
 -- Versão do servidor: 8.0.32
 -- versão do PHP: 8.0.25
 
@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 -- Banco de dados: `skywaysbd`
 --
 
+CREATE DATABASE skywaysbd;
+
+USE skywaysbd;
 -- --------------------------------------------------------
 
 --
@@ -63,7 +66,9 @@ CREATE TABLE `assento` (
 --
 
 INSERT INTO `assento` (`id_assento`, `preco_economico`, `preco_premium`) VALUES
-(1, '50.00', '102.00');
+(1, '50.00', '102.00'),
+(2, '56.00', '102.00'),
+(3, '56.00', '103.00');
 
 -- --------------------------------------------------------
 
@@ -75,7 +80,7 @@ CREATE TABLE `aviao` (
   `id_aviao` int NOT NULL,
   `modelo` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `matricula` char(5) COLLATE utf8mb4_general_ci NOT NULL,
-  `carga` decimal(10,3) NOT NULL,
+  `carga` decimal(10,2) NOT NULL,
   `velocidade` decimal(10,2) DEFAULT NULL,
   `fk_aeroporto` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -85,9 +90,10 @@ CREATE TABLE `aviao` (
 --
 
 INSERT INTO `aviao` (`id_aviao`, `modelo`, `matricula`, `carga`, `velocidade`, `fk_aeroporto`) VALUES
-(1, 'Boeing 747-8', 'PANFS', '447.000', '1041.00', 3),
-(2, 'Airbus A350-1000', 'PAABC', '306.000', '903.00', 1),
-(3, 'Boeing 787 Dreamliner', 'PANJE', '126.000', '958.00', 1);
+(1, 'Boeing 747-8', 'PANFS', '2700.00', '1041.00', 3),
+(2, 'Airbus A350-1000', 'PAABC', '3060.00', '903.00', 1),
+(3, 'Boeing 787 Dreamliner', 'PANJE', '1260.00', '958.00', 1),
+(4, 'Airbus A380', 'PAATO', '2760.00', '945.00', 2);
 
 -- --------------------------------------------------------
 
@@ -147,7 +153,8 @@ CREATE TABLE `conexao` (
   `id_conexao` int NOT NULL,
   `fk_conexao1` int NOT NULL,
   `fk_conexao2` int NOT NULL,
-  `distancia` decimal(10,2) NOT NULL
+  `distancia` decimal(10,2) NOT NULL,
+  `duracao` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -163,21 +170,7 @@ CREATE TABLE `contato` (
   `assunto` varchar(75) NOT NULL,
   `mensagem` text NOT NULL,
   `data_envio` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Extraindo dados da tabela `contato`
---
-
-INSERT INTO `contato` (`id_contato`, `nome`, `email`, `assunto`, `mensagem`, `data_envio`) VALUES
-(1, 'Marcelo Costa', 'marcelo@host.com', 'No céu tem pão?', 'e morreu...', NULL),
-(2, 'Marcelo Costa', 'marcelo@host.com', 'Teste', 'testetestetestetestetestetesteteste', NULL),
-(3, 'João', 'joao@host.com', 'teste', 'testetesteteste', NULL),
-(4, 'Roberto', 'roberto@host.com', 'teste', 'testetesteteste', NULL),
-(5, 'Junin', 'junin@host.com', 'teste', 'testetestetesteteste', NULL),
-(6, 'Fabim do Pneu', 'fabim@host.com', 'teste', 'testetestetestetesteteste', NULL),
-(7, 'teste erro', 'teste@host.com', 'teste erro', 'teste erroteste erroteste erroteste erro', NULL),
-(8, 'Silvio', 'silvio@host.com', 'Mahoi', 'olha o aviãozinho', '2023-05-13');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -269,8 +262,16 @@ CREATE TABLE `pagamento` (
   `tipo` char(1) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `data_pagamento` datetime DEFAULT NULL,
   `fk_cadastro` int NOT NULL,
-  `fk_passagem` int NOT NULL
+  `fk_passagem` int NOT NULL,
+  `cricao` DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `pagamento`
+--
+
+INSERT INTO `pagamento` (`id_pagamento`, `valor_pagamento`, `tipo`, `data_pagamento`, `fk_cadastro`, `fk_passagem`) VALUES
+(1, '1200.00', 'P', '2023-05-15 11:37:49', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -365,7 +366,9 @@ CREATE TABLE `voo` (
 --
 
 INSERT INTO `voo` (`id_voo`, `origem`, `destino`, `duracao`, `distancia`, `data_ida`, `data_chegada`, `aviao`, `fk_assento`, `escala`) VALUES
-(1, 2, 4, '02:05:05', '1000.00', '2023-05-08 18:03:09', '2023-05-12 14:03:10', 1, 1, NULL);
+(1, 2, 4, '02:05:05', '1000.00', '2023-05-16 18:03:09', '2023-05-16 23:03:10', 1, 1, NULL),
+(2, 2, 1, '00:25:00', '360.29', '2023-05-18 12:52:00', '2023-05-18 13:17:00', 4, 2, 0),
+(3, 1, 2, '00:25:00', '360.29', '2023-05-20 16:45:00', '2023-05-20 17:10:00', 3, 3, 0);
 
 --
 -- Índices para tabelas despejadas
@@ -495,13 +498,13 @@ ALTER TABLE `aeroporto`
 -- AUTO_INCREMENT de tabela `assento`
 --
 ALTER TABLE `assento`
-  MODIFY `id_assento` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_assento` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `aviao`
 --
 ALTER TABLE `aviao`
-  MODIFY `id_aviao` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_aviao` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `cadastro`
@@ -549,7 +552,7 @@ ALTER TABLE `funcionario`
 -- AUTO_INCREMENT de tabela `pagamento`
 --
 ALTER TABLE `pagamento`
-  MODIFY `id_pagamento` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pagamento` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `passageiro`
@@ -573,7 +576,7 @@ ALTER TABLE `pessoa`
 -- AUTO_INCREMENT de tabela `voo`
 --
 ALTER TABLE `voo`
-  MODIFY `id_voo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_voo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para despejos de tabelas
