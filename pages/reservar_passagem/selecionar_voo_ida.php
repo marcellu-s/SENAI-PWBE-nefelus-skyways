@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if (isset($_SESSION['login'])) {
+    // OK - Pode entrar chefe!
+} else {
+    header("location: ../login.php");
+}
+
 date_default_timezone_set('America/Sao_Paulo');
 ?>
 <!DOCTYPE html>
