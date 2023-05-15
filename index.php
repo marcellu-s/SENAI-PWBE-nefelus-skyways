@@ -154,7 +154,7 @@ date_default_timezone_set('America/Sao_Paulo');
         <!-- BOOKING-AREA -->
 
         <section class="booking-area">
-            <form>
+            <form action="./selecionar_voo_ida.php" method="post">
                 <div class="input-control mobile-hide input-trecho">
                     <div class="dropdown">
                         <button class="trigger-button" type="button">
