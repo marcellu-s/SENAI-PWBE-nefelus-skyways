@@ -13,6 +13,8 @@ if (isset($_SESSION['callback'])) {
     unset($_SESSION['callback']);
 }
 
+date_default_timezone_set('America/Sao_Paulo'); 
+
 include_once "../../ops/db.php";
 
 ?>

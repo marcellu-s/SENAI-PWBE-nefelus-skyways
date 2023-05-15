@@ -5,19 +5,18 @@ session_start();
 include_once "../../../ops/db.php";
 
 // Pegar as informações do fomulário.
-$nome = $_POST['nome'];
-$sobrenome = $_POST['sobrenome'];
+$nome = $_POST['first-name'];
+$sobrenome = $_POST['last-name'];
 $genero = $_POST['gender'];
-$nascimento = $_POST['nascimento'];
-$endereco = "" . $_POST['cep'] . " | " . $_POST['endereco'] . ", " . $_POST['numero'] . " - " . $_POST['bairro'] . " | " . $_POST['cidade'];
+$nascimento = $_POST['date-of-birth'];
+$endereco = "$_POST[endereco];$_POST[bairro];$_POST[cidade];$_POST[uf];$_POST[numero];$_POST[cep]";
 $cpf = $_POST['cpf'];
-$rg = $_POST['rg'];
-$celular = $_POST['celular'];
+$celular = $_POST['telephone'];
 $email = $_POST['email'];
-$senha = sha1($_POST['senha']);
+$senha = sha1($_POST['password']);
 $job = $_POST['job'];
 
-// Queries para a tabela CADASTROS.
+// Definir o ID
 
 $queryDefineID = mysqli_query($conn, "SELECT COUNT(id_pessoa) FROM pessoa");
 
@@ -25,53 +24,49 @@ $result = mysqli_fetch_array($queryDefineID);
 
 $id = $result[0] + 1;
 
-$q1 = "INSERT INTO pessoa (id_pessoa, p_nome, p_sobrenome, endereco, data_nasc, sexo, nacionalidade, cpf) VALUES (
-    $id, '$nome', '$sobrenome', '$endereco', '$nascimento', '$genero', NULL, '$cpf'
+// Queries de Inserção
+
+$queryPessoa = "INSERT INTO pessoa (id_pessoa, p_nome, p_sobrenome, endereco, data_nasc, sexo, cpf) VALUES (
+    $id, '$nome', '$sobrenome', '$endereco', '$nascimento', '$genero', '$cpf'
 )";
 
-$q2 = "INSERT INTO cadastro (email, telefone, senha, fk_pessoa) VALUES (
-    '$email', '$celular', '$senha', $id
+$queryCadastro = "INSERT INTO cadastro (id_cadastro, email, telefone, senha, fk_pessoa) VALUES (
+    $id, '$email', '$celular', '$senha', $id
 )";
 
-$q3 = "INSERT INTO funcionario (funcao, fk_pessoa, fk_cadastro) VALUES (
+$queryFuncionario = "INSERT INTO funcionario (funcao, fk_pessoa, fk_cadastro) VALUES (
     '$job', $id, $id
 )";
 
-// $qc1 = "INSERT INTO cadastro (email, telefone, senha, fk_pessoa) VALUES('$email', '$senha', 2)";
+// Executando as queries
 
-$qc2 = "SELECT COUNT(*) FROM cadastro WHERE email = '$email'";
-$qc3 = "SELECT COUNT(*) FROM cadastro WHERE telefone = '$celular'";
-$qc4 = "SELECT COUNT(*) FROM pessoa WHERE cpf = '$cpf'";
+$result = $conn->query($queryPessoa);
 
-$erro = false;
+if (mysqli_error($conn)) {
 
-if (mysqli_fetch_array(mysqli_query($conn, $qc2))[0] > 0) {
-    $_SESSION['callback'] = "<script>alert('Email já cadastrado.')</script>";
-    header("Location: ../../pages/add_funcionario.php");
-    $erro = true;
-};
+    $_SESSION['callback'] = "<script>window.alert('ERRO ao cadastrar!')</script>";
+    header("location: ../../pages/main.php");
+    die();
+}
 
-if (mysqli_fetch_array(mysqli_query($conn, $qc3))[0] > 0) {
-    $_SESSION['callback'] = "<script>alert('Celular já cadastrado.')</script>";
-    header("Location: ../../pages/add_funcionario.php");
-    $erro = true;
-};
+$conn->query($queryCadastro);
 
-if (mysqli_fetch_array(mysqli_query($conn, $qc4))[0] > 0) {
-    $_SESSION['callback'] = "<script>alert('CPF já cadastrado.')</script>";
-    header("Location: ../../pages/add_funcionario.php");
-    $erro = true;
+if (mysqli_error($conn)) {
 
-};
+    $_SESSION['callback'] = "<script>window.alert('ERRO ao cadastrar!')</script>";
+    header("location: ../../pages/main.php");
+    die();
+}
+$conn->query($queryFuncionario);
 
-// Enviar para a Database.
+if (mysqli_error($conn)) {
 
-if (!$erro === true) {
-    mysqli_query($conn, $q1);
-    mysqli_query($conn, $q2);
-    mysqli_query($conn, $q3);
-    $_SESSION['callback'] = "<script>alert('Conta cadastrada com sucesso!')</script>";
-    header("Location: ../../pages/add_funcionario.php");
-};
+    $_SESSION['callback'] = "<script>window.alert('ERRO ao cadastrar!')</script>";
+    header("location: ../../pages/main.php");
+    die();
+}
+
+$_SESSION['callback'] = "<script>window.alert('Cadastro efetuado com sucesso!')</script>";
+header("location: ../../pages/addEmployee.php");
 
 ?>

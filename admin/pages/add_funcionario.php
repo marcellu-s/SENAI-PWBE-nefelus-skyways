@@ -2,8 +2,12 @@
 
 session_start();
 
-if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+if (isset($_SESSION['login']) && $_SESSION['login'] == 'admin') {
     // OK - Pode entrar chefe!
+} else if (isset($_SESSION['login']) && $_SESSION['login'] == 'comum') {
+    // Funcionário não tem permissão
+    $_SESSION['callback'] = "<script>window.alert('Você não tem permissão para acessar está área!')</script>";
+    header("location: ./main.php");
 } else {
     header("location: ../../pages/login.php");
 }
@@ -12,6 +16,8 @@ if (isset($_SESSION['callback'])) {
     echo($_SESSION['callback']);
     unset($_SESSION['callback']);
 }
+
+date_default_timezone_set('America/Sao_Paulo'); 
 
 include_once "../../ops/db.php";
 
@@ -23,7 +29,7 @@ include_once "../../ops/db.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../assets/img/icons/favicon.ico" type="image/x-icon">
-    <title>Adicionar aeroporto</title>
+    <title>Adicionar funcionário</title>
     <!-- BOOTSTRAP ICONS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- FONTS GOOGLE -->
@@ -48,16 +54,16 @@ include_once "../../ops/db.php";
             </div>
             <form action="../assets/php/addEmployee.php" method="post">
                 <div class="input-control">
-                    <label for="nome">NOME</label>
-                    <input type="text" name="nome" id="nome" placeholder="João" required>
+                    <label for="first-name">NOME</label>
+                    <input type="text" name="first-name" id="first-name" placeholder="Seu primeiro nome" required>
                 </div>
                 <div class="input-control">
-                    <label for="sobrenome">SOBRENOME</label>
-                    <input type="text" name="sobrenome" id="sobrenome" placeholder="Silva" required>
+                    <label for="last-name">SOBRENOME</label>
+                    <input type="text" name="last-name" id="last-name" placeholder="Seu último nome" required>
                 </div>
                 <div class="input-control">
-                    <label for="nascimento">DATA DE NASCIMENTO</label>
-                    <input type="date" max="<?php echo(date('Y-m-d')); ?>" name="nascimento" id="nascimento">
+                    <label for="date-of-birth">DATA DE NASCIMENTO</label>
+                    <input type="date" max="<?php echo(date('Y-m-d')); ?>" name="date-of-birth" id="date-of-birth">
                 </div>
                 <div class="input-control">
                     <label for="gender">GÊNERO</label>
@@ -69,7 +75,7 @@ include_once "../../ops/db.php";
                 </div>
                 <div class="input-control">
                     <label for="cep">CEP</label>
-                    <input type="text" name="cep" id="cep" placeholder="04757000" required>
+                    <input type="text" name="cep" id="cep" placeholder="Informe um CEP válido" required>
                 </div>
                 <div class="input-control">
                     <label for="endereco">ENDEREÇO</label>
@@ -84,28 +90,32 @@ include_once "../../ops/db.php";
                     <input type="text" name="cidade" id="cidade" placeholder="..." readonly>
                 </div>
                 <div class="input-control">
-                    <label for="numero">NÚMERO RESIDÊNCIAL</label>
-                    <input type="text" name="numero" id="numero" placeholder="379" required>
+                    <label for="uf">UF</label>
+                    <input type="text" name="uf" id="uf" placeholder="..." readonly>
                 </div>
                 <div class="input-control">
-                    <label for="rg">RG</label>
-                    <input type="text" name="rg" id="rg" placeholder="04757-000" required>
+                    <label for="numero">NÚMERO RESIDENCIAL</label>
+                    <input type="text" name="numero" id="numero" placeholder="Informe o número residencial" required>
                 </div>
                 <div class="input-control">
                     <label for="cpf">CPF</label>
-                    <input type="text" name="cpf" id="cpf" placeholder="12345678910" required>
-                </div>
-                <div class="input-control">
-                    <label for="celular">TELEFONE-CELULAR</label>
-                    <input type="tel" name="celular" id="celular" placeholder="11912345678" required>
+                    <input type="text" name="cpf" id="cpf" placeholder="Informe os números do documento" required>
                 </div>
                 <div class="input-control">
                     <label for="email">E-MAIL</label>
                     <input type="email" name="email" id="email" placeholder="Informe um e-mail válido" required>
                 </div>
                 <div class="input-control">
-                    <label for="senha">SENHA</label>
-                    <input type="password" name="senha" id="senha" placeholder="Digite uma senha" required>
+                    <label for="telephone">TELEFONE-CELULAR</label>
+                    <input type="tel" name="telephone" id="telephone" placeholder="DDD + número" required>
+                </div>
+                <div class="input-control">
+                    <label for="password">SENHA</label>
+                    <input type="password" name="password" id="password" placeholder="Digite uma senha" required>
+                </div>
+                <div class="input-control">
+                    <label for="confirm-password">CONFIRMAR SENHA</label>
+                    <input type="password" name="confirm-password" id="confirm-password" placeholder="Digite a senha novamente" required>
                 </div>
                 <div class="input-control">
                     <label for="job">FUNÇÃO</label>
@@ -122,6 +132,10 @@ include_once "../../ops/db.php";
         </section>
     </main>
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="../../assets/js/cadastro/requestViaCep.js"></script>
     <script src="../assets/js/cadastro/validate.js"></script>
 </body>
 </html>

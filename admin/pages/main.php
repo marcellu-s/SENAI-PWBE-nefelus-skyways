@@ -8,6 +8,11 @@ if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['lo
     header("location: ../../pages/login.php");
 }
 
+if (isset($_SESSION['callback'])) {
+    echo($_SESSION['callback']);
+    unset($_SESSION['callback']);
+}
+
 include_once "../../ops/db.php";
 
 $result = $conn->query("SELECT p_nome, p_sobrenome FROM pessoa INNER JOIN cadastro ON cadastro.fk_pessoa = pessoa.id_pessoa WHERE id_cadastro = $_SESSION[loginID]");
@@ -134,7 +139,7 @@ $name = "$name[0] $name[1]";
                     <option value="avioes">Aviões</option>
                     <option value="passageiros">Passageiros</option>
                     <option value="cadastros">Cadastros</option>
-                    <option value="funcionarios">Funcionários</option>
+                    <?php if ($_SESSION['login'] == 'admin') { echo("<option value='funcionarios'>Funcionários</option>"); } ?>
                 </select>
             </div>
             <div class="dashboard-display">
@@ -145,7 +150,7 @@ $name = "$name[0] $name[1]";
                     <option value="aviao">Avião</option>
                     <option value="aeroporto">Aeroporto</option>
                     <option value="cidade">Cidade</option>
-                    <option value="funcionario">Funcionário</option>
+                    <?php if ($_SESSION['login'] == 'admin') { echo("<option value='funcionario'>Funcionário</option>"); } ?>
                 </select>
             </div>
             <div class="dashboard-display">

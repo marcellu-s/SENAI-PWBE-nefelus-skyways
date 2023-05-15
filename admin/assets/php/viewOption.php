@@ -104,11 +104,9 @@ function createTable($optionParam) {
 
         case 'cadastros': {
 
-            $query = "SELECT p_nome, p_sobrenome, data_nasc, sexo, nacionalidade, email, telefone, id_cadastro FROM cadastro
+            $query = "SELECT pessoa.*, cadastro.* FROM cadastro
             INNER JOIN pessoa
             ON pessoa.id_pessoa = cadastro.fk_pessoa
-            INNER JOIN funcionario
-            WHERE NOT funcionario.fk_cadastro = cadastro.id_cadastro
             LIMIT $qnt_result_pg OFFSET $inicio";
 
             $result = $conn->query($query);
@@ -131,20 +129,31 @@ function createTable($optionParam) {
 
                 $id = $assoc['id_cadastro'];
 
-                $countItens++;
+                // Aqui é uma gambierra para evitar que funcionario entre nesta lista
 
-                $name = "$assoc[p_nome] $assoc[p_sobrenome]";
-                $gender = strtolower($assoc['sexo']) == 'h' ? 'Homem' : 'Mulher';
+                $isEmployeer = "SELECT id_funcionario FROM funcionario
+                INNER JOIN cadastro
+                ON $id = funcionario.fk_cadastro";
 
-                $tbody = $tbody."<tr>
-                    <td>$name</td>
-                    <td>$assoc[data_nasc]</td>
-                    <td>$gender</td>
-                    <td>$assoc[nacionalidade]</td>
-                    <td>$assoc[email]</td>
-                    <td>$assoc[telefone]</td>
-                    <td><a href='./detalhes.php?id=$id&op=cadastro' target='_blank'><i class='bi bi-link'></i></a></td>
-                </tr>";
+                $resultIsEmployeer = $conn->query($isEmployeer);
+
+                if ($resultIsEmployeer->num_rows == 0) {
+
+                    $countItens++;
+
+                    $name = "$assoc[p_nome] $assoc[p_sobrenome]";
+                    $gender = strtolower($assoc['sexo']) == 'h' ? 'Homem' : 'Mulher';
+
+                    $tbody = $tbody."<tr>
+                        <td>$name</td>
+                        <td>$assoc[data_nasc]</td>
+                        <td>$gender</td>
+                        <td>$assoc[nacionalidade]</td>
+                        <td>$assoc[email]</td>
+                        <td>$assoc[telefone]</td>
+                        <td><a href='./detalhes.php?id=$id&op=cadastro' target='_blank'><i class='bi bi-link'></i></a></td>
+                    </tr>";
+                }
             }
 
             $check = true;
@@ -211,7 +220,6 @@ function createTable($optionParam) {
                     <th>Nome</th>
                     <th>Data de nascimento</th>
                     <th>Gênero</th>
-                    <th>Nacionalidade</th> 
                     <th>E-mail</th> 
                     <th>Telefone</th> 
                     <th>Função</th> 
@@ -236,7 +244,6 @@ function createTable($optionParam) {
                     <td>$name</td>
                     <td>$assoc[data_nasc]</td>
                     <td>$gender</td>
-                    <td>$assoc[nacionalidade]</td>
                     <td>$assoc[email]</td>
                     <td>$assoc[telefone]</td>
                     <td>$job</td>

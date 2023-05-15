@@ -156,7 +156,6 @@ if ($op) {
                     'passaporte' => $assoc['passaporte'],
                     'email' => $assoc['email'],
                     'telefone' => $assoc['telefone'],
-                    'email' => $assoc['email'],
                 ];
             }
         }
@@ -205,12 +204,9 @@ if ($op) {
                     'endereço' => $assoc['endereco'],
                     'data de nascimento' => $assoc['data_nasc'],
                     'gênero' => $gender,
-                    'nacionalidade' => $assoc['nacionalidade'],
                     'cpf' => $assoc['cpf'],
-                    'passaporte' => $assoc['passaporte'],
                     'email' => $assoc['email'],
                     'telefone' => $assoc['telefone'],
-                    'email' => $assoc['email'],
                 ];
             }
         }

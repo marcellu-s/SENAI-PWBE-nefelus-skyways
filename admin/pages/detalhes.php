@@ -2,8 +2,12 @@
 
 session_start();
 
-if (isset($_SESSION['login']) && ($_SESSION['login'] == 'admin' || $_SESSION['login'] == 'comum')) {
+if (isset($_SESSION['login']) && $_SESSION['login'] == 'admin') {
     // OK - Pode entrar chefe!
+} else if (isset($_SESSION['login']) && $_SESSION['login'] == 'comum') {
+    // Funcionário não tem permissão
+    $_SESSION['callback'] = "<script>window.alert('Você não tem permissão para acessar está área!')</script>";
+    header("location: ./main.php");
 } else {
     header("location: ../../pages/login.php");
 }
