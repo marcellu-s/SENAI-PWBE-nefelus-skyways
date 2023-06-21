@@ -8,4 +8,5 @@ Integrantes do projeto:
 <a href="https://github.com/Rodrigo-Martins-Mateus">Rodrigo Martins</a> |
 <a href="https://github.com/VerNancio">Vinicius Oliveira</a>
 
+Realizado durante o meu período de estudos no Senai Suíço-Brasileira.<br>
 Realizado no: 2º Semestre 2022/2023
